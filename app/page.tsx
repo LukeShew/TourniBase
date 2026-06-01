@@ -22,14 +22,7 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <header className="border-b border-fanpass-border bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-          <Image
-            src="/fanpass-logo.svg"
-            alt="FanPass"
-            width={176}
-            height={48}
-            priority
-            className="h-10 w-auto"
-          />
+          <Logo priority />
           <a
             href="#waitlist"
             className="rounded-md border border-fanpass-border px-4 py-2 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
@@ -139,13 +132,9 @@ export default function Home() {
       <footer className="bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-8 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <Image
-              src="/fanpass-logo.svg"
-              alt="FanPass"
-              width={132}
-              height={36}
-              className="mb-3 h-8 w-auto"
-            />
+            <div className="mb-3">
+              <Logo size="small" />
+            </div>
             <p>Questions? Contact the FanPass team.</p>
           </div>
           <nav className="flex gap-4">
@@ -159,6 +148,36 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function Logo({
+  priority = false,
+  size = "default"
+}: {
+  priority?: boolean;
+  size?: "default" | "small";
+}) {
+  return (
+    <div className="flex items-center gap-2.5" aria-label="FanPass">
+      <Image
+        src="/fanpass-mark.svg"
+        alt=""
+        width={160}
+        height={112}
+        priority={priority}
+        className={size === "small" ? "h-7 w-auto" : "h-9 w-auto"}
+      />
+      <span
+        className={
+          size === "small"
+            ? "text-xl font-extrabold text-fanpass-navy"
+            : "text-2xl font-extrabold text-fanpass-navy"
+        }
+      >
+        FanPass
+      </span>
+    </div>
   );
 }
 

@@ -1,0 +1,6 @@
+<svg width="160" height="112" viewBox="0 0 160 112" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FanPass mark</title>
+  <desc id="desc">Blue ticket with a white F</desc>
+  <path d="M18 8H142C147.523 8 152 12.4772 152 18V38C141.507 38 133 46.5066 133 57C133 67.4934 141.507 76 152 76V94C152 99.5228 147.523 104 142 104H18C12.4772 104 8 99.5228 8 94V76C18.4934 76 27 67.4934 27 57C27 46.5066 18.4934 38 8 38V18C8 12.4772 12.4772 8 18 8Z" fill="#2563EB"/>
+  <path d="M61 30H111C114.314 30 117 32.6863 117 36V45H75V56H107V65C107 68.3137 104.314 71 101 71H75V86H55V36C55 32.6863 57.6863 30 61 30Z" fill="white"/>
+</svg>
