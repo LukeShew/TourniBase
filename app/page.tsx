@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
-import fanpassLogo from "@/Logos/Screenshot 2026-06-01 at 3.24.38 PM.png";
+import fanpassLogo from "@/Refreshed logos/fanpass-full-color-horizontal.png";
 
 const problemCards = [
   {
