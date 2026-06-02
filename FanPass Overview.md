@@ -69,6 +69,7 @@ FanPass is trying to become the standardized admission infrastructure layer for 
 - Parent phone mockup uses John Smith as the sample pass holder
 - Waitlist forms require email, name, and organization/team, with directors using an Organization-only label
 - Role-page hero content keeps full-size spacing with normal top whitespace above the role copy
+- Site header uses the original logo, padding, and contact button height
 - Role-page waitlist sections keep the CTA focused by removing the extra explanatory paragraph
 - Waitlist form with default and locked role support
 - Audience-specific waitlist source values

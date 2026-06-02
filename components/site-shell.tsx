@@ -5,7 +5,7 @@ import fanpassLogo from "@/Refreshed logos/fanpass-full-color-horizontal-cropped
 export function SiteHeader() {
   return (
     <header className="border-b border-fanpass-border bg-white">
-      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-2">
+      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-4">
         <div className="justify-self-start">
           <SiteLogo priority />
         </div>
@@ -22,7 +22,7 @@ export function SiteHeader() {
         </nav>
         <a
           href="mailto:lsautomates@gmail.com"
-          className="inline-flex h-10 items-center justify-center justify-self-end rounded-md border border-fanpass-border px-4 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
+          className="inline-flex h-11 items-center justify-center justify-self-end rounded-md border border-fanpass-border px-4 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
         >
           Contact us
         </a>
@@ -83,7 +83,7 @@ export function SiteLogo({
         className={
           size === "small"
             ? "h-8 w-auto rounded-sm"
-            : "h-9 w-auto rounded-sm sm:h-10"
+            : "h-10 w-auto rounded-sm sm:h-11"
         }
       />
     </Link>
