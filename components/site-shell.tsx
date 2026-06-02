@@ -3,9 +3,11 @@ import Link from "next/link";
 import fanpassLogo from "@/Refreshed logos/fanpass-full-color-horizontal-cropped.png";
 
 export function SiteHeader({
-  waitlistHref = "/organizers#waitlist"
+  waitlistHref = "/organizers#waitlist",
+  showWaitlistButton = true
 }: {
   waitlistHref?: string;
+  showWaitlistButton?: boolean;
 }) {
   return (
     <header className="border-b border-fanpass-border bg-white">
@@ -22,12 +24,14 @@ export function SiteHeader({
             Coaches
           </Link>
         </nav>
-        <Link
-          href={waitlistHref}
-          className="inline-flex h-11 items-center justify-center rounded-md border border-fanpass-border px-4 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
-        >
-          Join waitlist
-        </Link>
+        {showWaitlistButton ? (
+          <Link
+            href={waitlistHref}
+            className="inline-flex h-11 items-center justify-center rounded-md border border-fanpass-border px-4 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
+          >
+            Join waitlist
+          </Link>
+        ) : null}
       </div>
     </header>
   );
