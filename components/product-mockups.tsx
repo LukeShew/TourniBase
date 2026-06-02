@@ -100,12 +100,12 @@ function ParentPassMockup() {
             </p>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <Metric label="Payment" value="Saved" />
-            <Metric label="Share" value="Ready" />
+            <Metric label="Status" value="Paid" />
+            <Metric label="Entrance" value="South doors" />
           </div>
           <div className="mt-3 rounded-lg border border-fanpass-border p-3">
-            <CheckInRow name="Grandparent pass" time="Shared" />
-            <CheckInRow name="Youth wristband" time="Included" />
+            <CheckInRow name="Next pass" time="" />
+            <CheckInRow name="Back to home" time="" />
           </div>
         </div>
       </div>
