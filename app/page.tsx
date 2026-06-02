@@ -66,7 +66,7 @@ function AudienceCard({ audience }: { audience: AudienceKey }) {
   return (
     <article className="flex min-h-[260px] flex-col rounded-lg border border-fanpass-border bg-white p-5 text-center shadow-soft">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-fanpass-blue">
+        <p className="flex min-h-10 items-center justify-center text-sm font-semibold uppercase tracking-[0.16em] text-fanpass-blue">
           {content.eyebrow}
         </p>
         <h3 className="mt-3 text-2xl font-bold text-fanpass-navy">
