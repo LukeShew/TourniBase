@@ -20,7 +20,7 @@ const roleCardContent: Record<
   parents: {
     button: "I'm a Parent",
     tagline: "Buy and save passes",
-    hint: "Built for families who want faster entry and less gate confusion."
+    hint: "Built for families who want quicker check-in and all their payments in one place."
   },
   coaches: {
     button: "I'm a Coach",
