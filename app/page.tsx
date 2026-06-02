@@ -32,7 +32,7 @@ const roleCardContent: Record<
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
-      <SiteHeader showWaitlistButton={false} />
+      <SiteHeader />
 
       <section id="choose-role" className="bg-fanpass-gray">
         <div className="mx-auto max-w-6xl px-5 py-8 lg:py-10">

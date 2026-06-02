@@ -118,7 +118,7 @@ export function AudiencePage({ audience }: { audience: AudienceKey }) {
 
   return (
     <main className="min-h-screen bg-white">
-      <SiteHeader waitlistHref="#waitlist" />
+      <SiteHeader />
 
       <section className="bg-fanpass-gray">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-20">

@@ -2,18 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import fanpassLogo from "@/Refreshed logos/fanpass-full-color-horizontal-cropped.png";
 
-export function SiteHeader({
-  waitlistHref = "/organizers#waitlist",
-  showWaitlistButton = true
-}: {
-  waitlistHref?: string;
-  showWaitlistButton?: boolean;
-}) {
+export function SiteHeader() {
   return (
     <header className="border-b border-fanpass-border bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
-        <SiteLogo priority />
-        <nav className="hidden items-center gap-5 text-sm font-semibold text-slate-600 md:flex">
+      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-4">
+        <div className="justify-self-start">
+          <SiteLogo priority />
+        </div>
+        <nav className="hidden items-center justify-self-center gap-5 text-sm font-semibold text-slate-600 md:flex">
           <Link className="hover:text-fanpass-blue" href="/organizers">
             Directors
           </Link>
@@ -24,14 +20,12 @@ export function SiteHeader({
             Coaches
           </Link>
         </nav>
-        {showWaitlistButton ? (
-          <Link
-            href={waitlistHref}
-            className="inline-flex h-11 items-center justify-center rounded-md border border-fanpass-border px-4 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
-          >
-            Join waitlist
-          </Link>
-        ) : null}
+        <a
+          href="mailto:lsautomates@gmail.com"
+          className="inline-flex h-11 items-center justify-center justify-self-end rounded-md border border-fanpass-border px-4 text-sm font-semibold text-fanpass-navy transition hover:border-fanpass-blue hover:text-fanpass-blue"
+        >
+          Contact us
+        </a>
       </div>
     </header>
   );
