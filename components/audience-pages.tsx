@@ -154,18 +154,18 @@ export function AudiencePage({ audience }: { audience: AudienceKey }) {
       <SiteHeader />
 
       <section className="bg-fanpass-gray">
-        <div className="mx-auto grid max-w-6xl gap-7 px-5 py-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-7">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 pb-12 pt-0 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:pb-16 lg:pt-0">
           <div>
-            <p className="mb-3 inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-semibold text-fanpass-blue">
+            <p className="mb-5 inline-flex rounded-full border border-blue-100 bg-white px-3 py-1 text-sm font-semibold text-fanpass-blue">
               {content.eyebrow}
             </p>
-            <h1 className="text-4xl font-bold leading-tight text-fanpass-navy sm:text-5xl lg:text-4xl xl:text-5xl">
+            <h1 className="text-4xl font-bold leading-tight text-fanpass-navy sm:text-5xl lg:text-6xl">
               {content.title}
             </h1>
-            <p className="mt-4 text-base leading-7 text-slate-600 lg:max-w-xl">
+            <p className="mt-5 text-lg leading-8 text-slate-600">
               {content.description}
             </p>
-            <ul className="mt-4 grid gap-1.5 text-sm font-semibold text-fanpass-navy">
+            <ul className="mt-6 grid gap-2 text-sm font-semibold text-fanpass-navy">
               {content.quickBenefits.map((benefit) => (
                 <li key={benefit} className="flex gap-2">
                   <span className="text-fanpass-blue">✓</span>
@@ -173,7 +173,7 @@ export function AudiencePage({ audience }: { audience: AudienceKey }) {
                 </li>
               ))}
             </ul>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="#waitlist"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-fanpass-blue px-6 text-base font-semibold text-white transition hover:bg-blue-700"
