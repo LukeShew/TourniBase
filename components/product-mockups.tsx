@@ -103,12 +103,20 @@ function ParentPassMockup() {
             <Metric label="Status" value="Paid" />
             <Metric label="Entrance" value="South doors" />
           </div>
-          <div className="mt-3 rounded-lg border border-fanpass-border p-3">
-            <CheckInRow name="Next pass" time="" />
-            <CheckInRow name="Back to home" time="" />
+          <div className="mt-3 overflow-hidden rounded-lg border border-fanpass-border">
+            <PassActionRow label="Next pass" />
+            <PassActionRow label="Back to home" />
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function PassActionRow({ label }: { label: string }) {
+  return (
+    <div className="border-t border-fanpass-border px-3 py-3 first:border-t-0">
+      <p className="text-sm font-semibold text-fanpass-navy">{label}</p>
     </div>
   );
 }
