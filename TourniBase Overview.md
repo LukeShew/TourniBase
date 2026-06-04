@@ -69,7 +69,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 - Parent phone mockup uses John Smith as the sample pass holder
 - Waitlist forms require email, name, and organization/team, with directors using an Organization-only label
 - Role-page hero content keeps full-size spacing with normal top whitespace above the role copy
-- Site header uses the primary TourniBase logo lockup, padding, and contact button height
+- Site header uses the secondary TourniBase logo lockup, padding, and contact button height
 - Role-page waitlist sections keep the CTA focused by removing the extra explanatory paragraph
 - Waitlist form with default and locked role support
 - Audience-specific waitlist source values
@@ -128,7 +128,7 @@ The paid domain can wait until there is enough waitlist validation.
 
 ## Brand Asset Status
 
-- Current production logo source: `TourniBase logos/tournibase-primary-logo-lockup.png`
+- Current production logo source: `TourniBase logos/tournibase-secondary-logo-lockup.png`
 - Use only files in `TourniBase logos/` for TourniBase branding.
 - Do not touch the files labeled as unavailable for use unless explicitly instructed.
 

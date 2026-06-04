@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import tournibaseLogo from "@/TourniBase logos/tournibase-primary-logo-lockup.png";
+import tournibaseLogo from "@/TourniBase logos/tournibase-secondary-logo-lockup.png";
 
 export function SiteHeader() {
   return (
