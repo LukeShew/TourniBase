@@ -34,10 +34,10 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="border-t border-tournibase-border bg-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="mb-1">
-            <SiteLogo size="small" />
+            <SiteLogo size="footer" />
           </div>
           <p>
             Questions? Contact the TourniBase team at{" "}
@@ -68,8 +68,13 @@ export function SiteLogo({
   size = "default"
 }: {
   priority?: boolean;
-  size?: "default" | "small";
+  size?: "default" | "footer";
 }) {
+  const logoClass =
+    size === "footer"
+      ? "h-14 w-auto -translate-x-4 rounded-sm"
+      : "h-16 w-auto rounded-sm sm:h-20";
+
   return (
     <Link
       href="/"
@@ -80,11 +85,7 @@ export function SiteLogo({
         src={tournibaseLogo}
         alt="TourniBase"
         priority={priority}
-        className={
-          size === "small"
-            ? "h-12 w-auto rounded-sm"
-            : "h-16 w-auto rounded-sm sm:h-20"
-        }
+        className={logoClass}
       />
     </Link>
   );

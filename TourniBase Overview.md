@@ -70,7 +70,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 - Waitlist forms require email, name, and organization/team, with directors using an Organization-only label
 - Role-page hero content keeps full-size spacing with normal top whitespace above the role copy
 - Site header uses the transparent TourniBase logo lockup at an oversized display size while keeping the original header height
-- Footer keeps its original overall height while using a slightly larger TourniBase logo aligned with the contact line
+- Footer keeps its original overall height while using a larger TourniBase logo whose visible mark aligns with the contact line
 - Role-page waitlist sections keep the CTA focused by removing the extra explanatory paragraph
 - Waitlist form with default and locked role support
 - Audience-specific waitlist source values
