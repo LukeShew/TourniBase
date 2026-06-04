@@ -89,8 +89,9 @@ function ParentPassMockup() {
             </div>
 
             <div className="flex h-[660px] flex-col bg-white px-5 pb-5 pt-4">
-              <div className="mb-7 flex items-center justify-between text-xs font-bold text-tournibase-navy">
-                <span>9:41</span>
+              <div className="mb-7 grid grid-cols-[1fr_112px_1fr] items-center text-xs font-bold text-tournibase-navy">
+                <span className="justify-self-center">9:41</span>
+                <span aria-hidden="true" />
                 <div className="flex items-center gap-1.5">
                   <div className="flex h-3 items-end gap-0.5">
                     <span className="h-1 w-1 rounded-sm bg-tournibase-navy" />
@@ -128,12 +129,31 @@ function ParentPassMockup() {
                 </div>
 
                 <button
-                  className="relative grid h-9 w-9 place-items-center rounded-full text-tournibase-navy"
+                  className="grid h-9 w-9 place-items-center rounded-full text-tournibase-navy"
                   aria-label="Notifications"
                   type="button"
                 >
-                  <span className="h-5 w-4 rounded-t-full border-2 border-current border-b-0" />
-                  <span className="absolute bottom-2 h-1.5 w-3 rounded-b-full border-b-2 border-current" />
+                  <svg
+                    aria-hidden="true"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 8.6a6 6 0 0 0-12 0c0 7.1-2.4 7.8-2.4 7.8h16.8S18 15.7 18 8.6Z"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    />
+                    <path
+                      d="M14 20a2.3 2.3 0 0 1-4 0"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    />
+                  </svg>
                 </button>
               </div>
 
