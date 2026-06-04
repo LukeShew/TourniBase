@@ -92,14 +92,18 @@ function ParentPassMockup() {
               <div className="mb-7 grid grid-cols-[1fr_112px_1fr] items-center text-xs font-bold text-tournibase-navy">
                 <span className="justify-self-center">9:41</span>
                 <span aria-hidden="true" />
-                <div className="flex items-center gap-1.5">
-                  <div className="flex h-3 items-end gap-0.5">
-                    <span className="h-1 w-1 rounded-sm bg-tournibase-navy" />
-                    <span className="h-2 w-1 rounded-sm bg-tournibase-navy" />
-                    <span className="h-3 w-1 rounded-sm bg-tournibase-navy" />
+                <div className="flex items-center gap-1.5 justify-self-center">
+                  <div className="flex h-3.5 w-[18px] items-end gap-0.5">
+                    <span className="h-1.5 w-1 rounded-[1px] bg-tournibase-navy" />
+                    <span className="h-2 w-1 rounded-[1px] bg-tournibase-navy" />
+                    <span className="h-2.5 w-1 rounded-[1px] bg-tournibase-navy" />
+                    <span className="h-3 w-1 rounded-[1px] bg-tournibase-navy" />
                   </div>
-                  <div className="h-2.5 w-4 rounded-sm border border-tournibase-navy">
-                    <div className="h-full w-3 rounded-sm bg-tournibase-navy" />
+                  <div className="flex items-center">
+                    <div className="h-2.5 w-[18px] rounded-[3px] border border-tournibase-navy p-px">
+                      <div className="h-full w-full rounded-[1.5px] bg-tournibase-navy" />
+                    </div>
+                    <span className="h-1.5 w-0.5 rounded-r-sm bg-tournibase-navy" />
                   </div>
                 </div>
               </div>
