@@ -101,7 +101,7 @@ function ParentPassMockup() {
                     <span className="h-2.5 w-1 rounded-[1px] bg-tournibase-navy" />
                     <span className="h-3 w-1 rounded-[1px] bg-tournibase-navy" />
                   </div>
-                  <div className="flex translate-x-0.5 -translate-y-px items-center">
+                  <div className="flex translate-x-0.5 translate-y-px items-center">
                     <div className="h-2.5 w-[18px] rounded-[3px] border border-tournibase-navy p-px">
                       <div className="h-full w-full rounded-[1.5px] bg-tournibase-navy" />
                     </div>
