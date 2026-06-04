@@ -1,3 +1,6 @@
+import Image from "next/image";
+import tournibaseAppLogo from "@/TourniBase logos/tournibase-transparent-app-logo.png";
+
 type MockupType = "organizers" | "parents" | "coaches";
 
 export function ProductMockup({ type }: { type: MockupType }) {
@@ -73,42 +76,128 @@ function OrganizerDashboardMockup() {
 
 function ParentPassMockup() {
   return (
-    <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
-      <div className="mx-auto max-w-[320px] rounded-[28px] border border-slate-200 bg-tournibase-navy p-3">
-        <div className="rounded-[22px] bg-white p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <p className="text-sm font-bold text-tournibase-navy">TourniBase</p>
-            <div className="h-2 w-14 rounded-full bg-slate-200" />
-          </div>
-          <div className="rounded-lg bg-tournibase-blue p-4 text-white">
-            <p className="text-sm font-semibold text-blue-100">Weekend Pass</p>
-            <h3 className="mt-1 text-2xl font-bold">John Smith</h3>
-            <div className="mt-4 grid aspect-square grid-cols-5 gap-1 rounded-md bg-white p-3">
-              {Array.from({ length: 25 }).map((_, index) => (
-                <div
-                  key={index}
-                  className={
-                    index % 3 === 0 || index % 7 === 0
-                      ? "bg-tournibase-navy"
-                      : "bg-white"
-                  }
-                />
-              ))}
+    <div className="rounded-lg border border-tournibase-border bg-white px-4 py-6 shadow-soft">
+      <div className="relative mx-auto w-full max-w-[330px]">
+        <div className="absolute -left-1.5 top-24 h-10 w-1 rounded-l bg-slate-500" />
+        <div className="absolute -left-1.5 top-40 h-16 w-1 rounded-l bg-slate-500" />
+        <div className="absolute -right-1.5 top-36 h-20 w-1 rounded-r bg-slate-500" />
+
+        <div className="rounded-[46px] border-[7px] border-slate-950 bg-slate-950 p-2 shadow-[0_30px_90px_rgba(15,23,42,0.18)]">
+          <div className="relative overflow-hidden rounded-[36px] bg-white">
+            <div className="absolute left-1/2 top-2 z-20 h-8 w-28 -translate-x-1/2 rounded-full bg-black">
+              <div className="absolute right-5 top-2.5 h-2.5 w-2.5 rounded-full bg-slate-800 ring-1 ring-slate-700" />
             </div>
-            <p className="mt-4 text-xs font-medium text-blue-100">
-              Valid June 14 - June 16
-            </p>
-          </div>
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <Metric label="Status" value="Paid" />
-            <Metric label="Entrance" value="South doors" />
-          </div>
-          <div className="mt-3 overflow-hidden rounded-lg border border-tournibase-border">
-            <PassActionRow label="Next pass" />
-            <PassActionRow label="Back to home" />
+
+            <div className="flex h-[660px] flex-col bg-white px-5 pb-5 pt-4">
+              <div className="mb-7 flex items-center justify-between text-xs font-bold text-tournibase-navy">
+                <span>9:41</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="flex h-3 items-end gap-0.5">
+                    <span className="h-1 w-1 rounded-sm bg-tournibase-navy" />
+                    <span className="h-2 w-1 rounded-sm bg-tournibase-navy" />
+                    <span className="h-3 w-1 rounded-sm bg-tournibase-navy" />
+                  </div>
+                  <div className="h-2.5 w-4 rounded-sm border border-tournibase-navy">
+                    <div className="h-full w-3 rounded-sm bg-tournibase-navy" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-5 flex items-center justify-between">
+                <button
+                  className="grid h-9 w-9 place-items-center rounded-full text-tournibase-navy"
+                  aria-label="Open menu"
+                  type="button"
+                >
+                  <span className="grid gap-1">
+                    <span className="h-0.5 w-5 rounded bg-current" />
+                    <span className="h-0.5 w-5 rounded bg-current" />
+                    <span className="h-0.5 w-5 rounded bg-current" />
+                  </span>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={tournibaseAppLogo}
+                    alt=""
+                    className="h-9 w-9 object-contain"
+                  />
+                  <span className="text-xl font-bold text-tournibase-navy">
+                    TourniBase
+                  </span>
+                </div>
+
+                <button
+                  className="relative grid h-9 w-9 place-items-center rounded-full text-tournibase-navy"
+                  aria-label="Notifications"
+                  type="button"
+                >
+                  <span className="h-5 w-4 rounded-t-full border-2 border-current border-b-0" />
+                  <span className="absolute bottom-2 h-1.5 w-3 rounded-b-full border-b-2 border-current" />
+                </button>
+              </div>
+
+              <div className="rounded-2xl bg-tournibase-blue p-5 text-white shadow-[0_18px_45px_rgba(37,99,235,0.28)]">
+                <p className="text-2xl font-bold leading-none">Weekend Pass</p>
+                <p className="mt-2 text-sm font-semibold text-blue-100">
+                  June 14 - June 16, 2026
+                </p>
+
+                <div className="mx-auto mt-7 grid aspect-square w-40 grid-cols-7 gap-1 rounded-xl bg-white p-3 shadow-inner">
+                  {[
+                    1, 1, 1, 0, 1, 1, 1,
+                    1, 0, 1, 0, 1, 0, 1,
+                    1, 1, 1, 1, 1, 1, 1,
+                    0, 1, 0, 1, 0, 1, 0,
+                    1, 1, 1, 0, 1, 1, 1,
+                    1, 0, 1, 1, 1, 0, 1,
+                    1, 1, 1, 0, 1, 1, 1
+                  ].map((filled, index) => (
+                    <span
+                      key={index}
+                      className={
+                        filled
+                          ? "rounded-sm bg-tournibase-navy"
+                          : "rounded-sm bg-white"
+                      }
+                    />
+                  ))}
+                </div>
+
+                <div className="mt-7 text-center">
+                  <h3 className="text-2xl font-bold">John Smith</h3>
+                  <p className="mt-1 text-xs font-semibold text-blue-100">
+                    Pass ID: 7F34-A2B9-8C1D
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <PhoneInfoTile label="Status" value="Paid" />
+                <PhoneInfoTile label="Entrance" value="South doors" />
+              </div>
+
+              <div className="mt-3 overflow-hidden rounded-xl border border-tournibase-border bg-white">
+                <PassActionRow label="Next pass" />
+                <PassActionRow label="Back to home" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function PhoneInfoTile({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-tournibase-border bg-white p-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
+        {label}
+      </p>
+      <p className="mt-1 text-lg font-bold leading-tight text-tournibase-navy">
+        {value}
+      </p>
     </div>
   );
 }

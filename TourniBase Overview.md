@@ -64,7 +64,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 - Dedicated audience pages for tournament directors, parents/spectators, and coaches with role-specific benefits, mockups, and stronger signup prompts
 - Coach mockup shows clearer roster states for checked in, pass-ready, and not-registered players
 - Parent page stats emphasize a unified payment processor
-- Parent phone mockup shows paid status, entrance info, and simple pass navigation rows
+- Parent page uses a realistic iPhone-style pass mockup with TourniBase branding, paid status, entrance info, QR-style code, and simple pass navigation rows
 - Parent phone mockup action rows use clearer spacing below the pass details
 - Parent phone mockup uses John Smith as the sample pass holder
 - Waitlist forms require email, name, and organization/team, with directors using an Organization-only label
