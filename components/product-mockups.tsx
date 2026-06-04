@@ -90,7 +90,9 @@ function ParentPassMockup() {
 
             <div className="flex h-[660px] flex-col bg-white px-5 pb-5 pt-4">
               <div className="mb-7 grid grid-cols-[1fr_112px_1fr] items-center text-xs font-bold text-tournibase-navy">
-                <span className="justify-self-center text-sm">9:41</span>
+                <span className="-translate-x-1 justify-self-center text-sm">
+                  9:41
+                </span>
                 <span aria-hidden="true" />
                 <div className="flex items-center gap-1.5 justify-self-center">
                   <div className="flex h-3.5 w-[18px] items-end gap-0.5">
@@ -99,7 +101,7 @@ function ParentPassMockup() {
                     <span className="h-2.5 w-1 rounded-[1px] bg-tournibase-navy" />
                     <span className="h-3 w-1 rounded-[1px] bg-tournibase-navy" />
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex translate-x-0.5 -translate-y-px items-center">
                     <div className="h-2.5 w-[18px] rounded-[3px] border border-tournibase-navy p-px">
                       <div className="h-full w-full rounded-[1.5px] bg-tournibase-navy" />
                     </div>

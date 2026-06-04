@@ -66,7 +66,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 - Coach page stats use clearer readiness copy with "for arrival"
 - Parent page stats emphasize a unified payment processor
 - Parent page uses a realistic iPhone-style pass mockup with TourniBase branding, paid status, entrance info, a denser random-looking QR-style code, and simple pass navigation rows
-- Parent phone mockup uses a larger real TourniBase logo lockup in the app header, centered status-bar elements with a larger time, iOS-style cell/battery indicators, and a smaller standard bell notification icon
+- Parent phone mockup uses a larger real TourniBase logo lockup in the app header, tuned status-bar positioning with a larger time, iOS-style cell/battery indicators, and a smaller standard bell notification icon
 - Parent phone mockup action rows use clearer spacing below the pass details
 - Parent phone mockup uses John Smith as the sample pass holder
 - Waitlist forms require email, name, and organization/team, with directors using an Organization-only label
