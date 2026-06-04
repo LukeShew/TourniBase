@@ -82,8 +82,8 @@ export function SiteLogo({
         priority={priority}
         className={
           size === "small"
-            ? "h-10 w-auto rounded-sm"
-            : "h-12 w-auto rounded-sm sm:h-14"
+            ? "h-12 w-auto rounded-sm"
+            : "h-16 w-auto rounded-sm sm:h-20"
         }
       />
     </Link>
