@@ -114,7 +114,7 @@ export const audienceContent: Record<AudienceKey, AudienceContent> = {
     title: "Organize team entry before the first whistle.",
     description:
       "TourniBase helps coaches see who is ready for event access, which families still need passes, and what needs attention before the team arrives.",
-    earlyAccessTitle: "Help your team arrive ready.",
+    earlyAccessTitle: "Sign up for early access to prepare parents for entry.",
     benefitsTitle: "Handle pass status before it turns into gate chaos.",
     benefitsIntro:
       "Coaches should not spend tournament mornings answering the same admission questions. TourniBase gives teams a clearer way to coordinate access.",
