@@ -111,7 +111,7 @@ function ParentPassMockup() {
               </div>
 
               <div className="mb-5 flex items-center justify-between">
-                <div className="relative h-12 w-48">
+                <div className="relative -ml-6 h-12 w-48">
                   <Image
                     src={tournibaseLogoLockup}
                     alt="TourniBase"
