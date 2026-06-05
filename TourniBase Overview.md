@@ -130,6 +130,12 @@ Local Git remote `origin` points to `https://github.com/LukeShew/TourniBase.git`
 
 Keep work committed after changes so the GitHub push button can push `main` to `origin/main`.
 
+## Folder Rename Status
+
+The local project root is now `/Users/lukeshewmaker/Documents/Codex Sandbox/TourniBase`.
+
+Source files, docs, package metadata, and Git remote settings no longer reference the old `FanPass` project folder. The ignored `.next` cache previously contained stale absolute paths from the old folder and was cleared so local dev can rebuild from the TourniBase root.
+
 ## Vercel Status
 
 The live Vercel waitlist site is available at `https://tourni-base.vercel.app/`.
