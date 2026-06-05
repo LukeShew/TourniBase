@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import tournibaseLogoLockup from "@/TourniBase logos/tournibase-transparent-logo-lockup.png";
 
 type MockupType = "organizers" | "parents" | "coaches";
@@ -17,33 +18,27 @@ export function ProductMockup({ type }: { type: MockupType }) {
 
 function OrganizerDashboardMockup() {
   return (
-    <div className="mx-auto w-full max-w-[680px]">
-      <div className="rounded-t-[28px] border-[8px] border-slate-950 bg-slate-950 p-2 shadow-[0_28px_80px_rgba(15,23,42,0.2)]">
-        <div className="relative overflow-hidden rounded-t-[18px] bg-white p-3">
-          <div
-            className="absolute left-1/2 top-1.5 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-slate-700"
-            aria-hidden="true"
-          />
-          <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
-                  Gate dashboard
-                </p>
-                <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
-                  North Entrance
-                </h3>
-              </div>
-              <div className="rounded-md bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-700">
-                Live
-              </div>
-            </div>
+    <TabletFrame>
+      <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
+              Gate dashboard
+            </p>
+            <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
+              North Entrance
+            </h3>
+          </div>
+          <div className="rounded-md bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-700">
+            Live
+          </div>
+        </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
-              <Metric label="Today's revenue" value="$8,420" />
-              <Metric label="Checked in" value="612" />
-              <Metric label="Passes sold" value="738" />
-            </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Metric label="Today's revenue" value="$8,420" />
+          <Metric label="Checked in" value="612" />
+          <Metric label="Passes sold" value="738" />
+        </div>
 
             <div className="mt-4 grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
               <div className="rounded-lg border border-tournibase-border p-4">
@@ -79,16 +74,8 @@ function OrganizerDashboardMockup() {
               <CheckInRow name="Adult day pass" time="$18.00" />
               <CheckInRow name="Team coach pass" time="$0.00" />
             </div>
-          </div>
-        </div>
       </div>
-      <div
-        className="mx-auto h-3 w-[86%] rounded-b-2xl bg-slate-300 shadow-[0_18px_35px_rgba(15,23,42,0.12)]"
-        aria-hidden="true"
-      >
-        <div className="mx-auto h-1.5 w-28 rounded-b-xl bg-slate-400/70" />
-      </div>
-    </div>
+    </TabletFrame>
   );
 }
 
@@ -249,27 +236,21 @@ function PassActionRow({ label }: { label: string }) {
 
 function CoachMockup() {
   return (
-    <div className="mx-auto w-full max-w-[620px]">
-      <div className="rounded-[38px] border-[10px] border-slate-950 bg-slate-950 p-2 shadow-[0_30px_90px_rgba(15,23,42,0.18)]">
-        <div className="relative overflow-hidden rounded-[26px] bg-white p-4">
-          <div
-            className="absolute left-1/2 top-1.5 h-2 w-2 -translate-x-1/2 rounded-full bg-slate-800"
-            aria-hidden="true"
-          />
-          <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
-                  Team access
-                </p>
-                <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
-                  14U Blue Roster
-                </h3>
-              </div>
-              <div className="rounded-md bg-blue-50 px-3 py-1 text-sm font-bold text-tournibase-blue">
-                2 checked in
-              </div>
-            </div>
+    <TabletFrame>
+      <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
+              Team access
+            </p>
+            <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
+              14U Blue Roster
+            </h3>
+          </div>
+          <div className="rounded-md bg-blue-50 px-3 py-1 text-sm font-bold text-tournibase-blue">
+            2 checked in
+          </div>
+        </div>
 
             <div className="grid gap-3 sm:grid-cols-3">
               <Metric label="Players" value="12" />
@@ -316,7 +297,21 @@ function CoachMockup() {
                 </p>
               </div>
             </div>
-          </div>
+      </div>
+    </TabletFrame>
+  );
+}
+
+function TabletFrame({ children }: { children: ReactNode }) {
+  return (
+    <div className="mx-auto w-full max-w-[680px]">
+      <div className="rounded-[34px] border-[9px] border-slate-950 bg-slate-950 p-2 shadow-[0_30px_90px_rgba(15,23,42,0.18)]">
+        <div className="relative overflow-hidden rounded-[24px] bg-white p-4">
+          <div
+            className="absolute left-1/2 top-1.5 h-2 w-2 -translate-x-1/2 rounded-full bg-slate-800"
+            aria-hidden="true"
+          />
+          {children}
         </div>
       </div>
     </div>
