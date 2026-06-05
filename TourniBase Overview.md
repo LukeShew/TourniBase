@@ -62,6 +62,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 
 - Role-first homepage with a concise hero, centered header navigation, contact email shortcut, refined audience card copy for each role, aligned card text/buttons, bold role buttons, and progressive disclosure
 - Dedicated audience pages for tournament directors, parents/spectators, and coaches with role-specific benefits, mockups, and stronger signup prompts
+- Trial device framing is active: the director dashboard is shown inside a MacBook-style frame and the coach dashboard is shown inside an iPad-style frame, while keeping the existing dashboard content
 - Coach mockup shows clearer roster states for checked in, pass-ready, and not-registered players
 - Coach page stats use clearer readiness copy with "for arrival"
 - Parent page stats emphasize a unified payment processor

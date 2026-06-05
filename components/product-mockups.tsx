@@ -17,58 +17,76 @@ export function ProductMockup({ type }: { type: MockupType }) {
 
 function OrganizerDashboardMockup() {
   return (
-    <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
-            Gate dashboard
-          </p>
-          <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
-            North Entrance
-          </h3>
-        </div>
-        <div className="rounded-md bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-700">
-          Live
-        </div>
-      </div>
+    <div className="mx-auto w-full max-w-[680px]">
+      <div className="rounded-t-[28px] border-[8px] border-slate-950 bg-slate-950 p-2 shadow-[0_28px_80px_rgba(15,23,42,0.2)]">
+        <div className="relative overflow-hidden rounded-t-[18px] bg-white p-3">
+          <div
+            className="absolute left-1/2 top-1.5 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-slate-700"
+            aria-hidden="true"
+          />
+          <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
+                  Gate dashboard
+                </p>
+                <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
+                  North Entrance
+                </h3>
+              </div>
+              <div className="rounded-md bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-700">
+                Live
+              </div>
+            </div>
 
-      <div className="grid gap-3 sm:grid-cols-3">
-        <Metric label="Today's revenue" value="$8,420" />
-        <Metric label="Checked in" value="612" />
-        <Metric label="Passes sold" value="738" />
-      </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Metric label="Today's revenue" value="$8,420" />
+              <Metric label="Checked in" value="612" />
+              <Metric label="Passes sold" value="738" />
+            </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-lg border border-tournibase-border p-4">
-          <div className="mb-3 flex items-center justify-between">
-            <p className="font-bold text-tournibase-navy">Entry pace</p>
-            <p className="text-sm font-semibold text-slate-500">Last hour</p>
+            <div className="mt-4 grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-lg border border-tournibase-border p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="font-bold text-tournibase-navy">Entry pace</p>
+                  <p className="text-sm font-semibold text-slate-500">
+                    Last hour
+                  </p>
+                </div>
+                <div className="flex h-36 items-end gap-2">
+                  {[38, 62, 49, 84, 72, 96, 65].map((height, index) => (
+                    <div
+                      key={index}
+                      className="flex-1 rounded-t bg-tournibase-blue"
+                      style={{ height: `${height}%` }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-tournibase-border p-4">
+                <p className="mb-3 font-bold text-tournibase-navy">Gate lanes</p>
+                <CheckInRow name="North Gate" time="284 checked in" />
+                <CheckInRow name="South Gate" time="196 checked in" />
+                <CheckInRow name="Court 4 Entry" time="132 checked in" />
+                <CheckInRow name="Manual reviews" time="8 pending" />
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-tournibase-border p-4">
+              <p className="mb-3 font-bold text-tournibase-navy">Recent sales</p>
+              <CheckInRow name="Weekend family pass" time="$45.00" />
+              <CheckInRow name="Adult day pass" time="$18.00" />
+              <CheckInRow name="Team coach pass" time="$0.00" />
+            </div>
           </div>
-          <div className="flex h-36 items-end gap-2">
-            {[38, 62, 49, 84, 72, 96, 65].map((height, index) => (
-              <div
-                key={index}
-                className="flex-1 rounded-t bg-tournibase-blue"
-                style={{ height: `${height}%` }}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-tournibase-border p-4">
-          <p className="mb-3 font-bold text-tournibase-navy">Gate lanes</p>
-          <CheckInRow name="North Gate" time="284 checked in" />
-          <CheckInRow name="South Gate" time="196 checked in" />
-          <CheckInRow name="Court 4 Entry" time="132 checked in" />
-          <CheckInRow name="Manual reviews" time="8 pending" />
         </div>
       </div>
-
-      <div className="mt-4 rounded-lg border border-tournibase-border p-4">
-        <p className="mb-3 font-bold text-tournibase-navy">Recent sales</p>
-        <CheckInRow name="Weekend family pass" time="$45.00" />
-        <CheckInRow name="Adult day pass" time="$18.00" />
-        <CheckInRow name="Team coach pass" time="$0.00" />
+      <div
+        className="mx-auto h-3 w-[86%] rounded-b-2xl bg-slate-300 shadow-[0_18px_35px_rgba(15,23,42,0.12)]"
+        aria-hidden="true"
+      >
+        <div className="mx-auto h-1.5 w-28 rounded-b-xl bg-slate-400/70" />
       </div>
     </div>
   );
@@ -231,50 +249,74 @@ function PassActionRow({ label }: { label: string }) {
 
 function CoachMockup() {
   return (
-    <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
-            Team access
-          </p>
-          <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
-            14U Blue Roster
-          </h3>
-        </div>
-        <div className="rounded-md bg-blue-50 px-3 py-1 text-sm font-bold text-tournibase-blue">
-          2 checked in
-        </div>
-      </div>
+    <div className="mx-auto w-full max-w-[620px]">
+      <div className="rounded-[38px] border-[10px] border-slate-950 bg-slate-950 p-2 shadow-[0_30px_90px_rgba(15,23,42,0.18)]">
+        <div className="relative overflow-hidden rounded-[26px] bg-white p-4">
+          <div
+            className="absolute left-1/2 top-1.5 h-2 w-2 -translate-x-1/2 rounded-full bg-slate-800"
+            aria-hidden="true"
+          />
+          <div className="rounded-lg border border-tournibase-border bg-white p-4 shadow-soft">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-tournibase-blue">
+                  Team access
+                </p>
+                <h3 className="mt-1 text-xl font-bold text-tournibase-navy">
+                  14U Blue Roster
+                </h3>
+              </div>
+              <div className="rounded-md bg-blue-50 px-3 py-1 text-sm font-bold text-tournibase-blue">
+                2 checked in
+              </div>
+            </div>
 
-      <div className="grid gap-3 sm:grid-cols-3">
-        <Metric label="Players" value="12" />
-        <Metric label="Coaches" value="3" />
-        <Metric label="Families" value="18" />
-      </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Metric label="Players" value="12" />
+              <Metric label="Coaches" value="3" />
+              <Metric label="Families" value="18" />
+            </div>
 
-      <div className="mt-4 rounded-lg border border-tournibase-border p-4">
-        <p className="mb-3 font-bold text-tournibase-navy">Arrival status</p>
-        <TeamRow name="M. Carter" status="Checked in" statusColor="green" />
-        <TeamRow name="A. Johnson" status="Checked in" statusColor="green" />
-        <TeamRow
-          name="T. Williams"
-          status="Has pass, not checked in"
-          statusColor="yellow"
-        />
-        <TeamRow name="R. Davis" status="Has not registered" statusColor="red" />
-      </div>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
-          <p className="text-sm font-bold text-tournibase-blue">Next action</p>
-          <p className="mt-1 text-sm leading-6 text-slate-600">
-            Send reminders to 4 families before arrival.
-          </p>
-        </div>
-        <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-3">
-          <p className="text-sm font-bold text-emerald-700">Organizer view</p>
-          <p className="mt-1 text-sm leading-6 text-slate-600">
-            Team access status is visible at the gate.
-          </p>
+            <div className="mt-4 rounded-lg border border-tournibase-border p-4">
+              <p className="mb-3 font-bold text-tournibase-navy">
+                Arrival status
+              </p>
+              <TeamRow name="M. Carter" status="Checked in" statusColor="green" />
+              <TeamRow
+                name="A. Johnson"
+                status="Checked in"
+                statusColor="green"
+              />
+              <TeamRow
+                name="T. Williams"
+                status="Has pass, not checked in"
+                statusColor="yellow"
+              />
+              <TeamRow
+                name="R. Davis"
+                status="Has not registered"
+                statusColor="red"
+              />
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+                <p className="text-sm font-bold text-tournibase-blue">
+                  Next action
+                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  Send reminders to 4 families before arrival.
+                </p>
+              </div>
+              <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-3">
+                <p className="text-sm font-bold text-emerald-700">
+                  Organizer view
+                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  Team access status is visible at the gate.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
