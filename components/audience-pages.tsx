@@ -75,7 +75,7 @@ export const audienceContent: Record<AudienceKey, AudienceContent> = {
     title: "Get through the gate faster and get back to the game.",
     description:
       "TourniBase helps families buy, save, and show passes without hunting for cash, payment screenshots, or the right person at the gate.",
-    earlyAccessTitle: "Join early access for easier tournament weekends.",
+    earlyAccessTitle: "Join early access for smoother tournament entry.",
     benefitsTitle: "Keep tournament entry simple for the whole family.",
     benefitsIntro:
       "Parents care about convenience, savings, and getting to the court or field on time. TourniBase keeps the pass flow easy before and during the event.",
