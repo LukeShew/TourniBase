@@ -111,21 +111,6 @@ function ParentPassMockup() {
               </div>
 
               <div className="mb-5 flex items-center justify-between">
-                <button
-                  className="grid h-9 w-9 place-items-center rounded-full text-tournibase-navy"
-                  aria-label="Open menu"
-                  type="button"
-                >
-                  <span className="grid gap-0.5 text-tournibase-navy">
-                    {[0, 1, 2].map((item) => (
-                      <span key={item} className="flex items-center gap-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                        <span className="h-1.5 w-5 rounded bg-current" />
-                      </span>
-                    ))}
-                  </span>
-                </button>
-
                 <div className="relative h-12 w-48">
                   <Image
                     src={tournibaseLogoLockup}
