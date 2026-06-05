@@ -75,6 +75,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 - Site header uses the transparent TourniBase logo lockup at an oversized display size while keeping the original header height
 - Footer keeps its original overall height while using a larger TourniBase logo whose visible mark aligns with the contact line
 - Role-page waitlist sections keep the CTA focused by removing the extra explanatory paragraph
+- Role-page early-access promo headlines are separate from the "Why it matters" headlines, avoiding repeated section copy
 - Waitlist form with default and locked role support
 - Audience-specific waitlist source values
 - Email validation

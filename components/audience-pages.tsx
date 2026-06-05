@@ -11,6 +11,7 @@ type AudienceContent = {
   eyebrow: string;
   title: string;
   description: string;
+  earlyAccessTitle: string;
   benefitsTitle: string;
   benefitsIntro: string;
   role: WaitlistRole;
@@ -35,6 +36,7 @@ export const audienceContent: Record<AudienceKey, AudienceContent> = {
     title: "Streamline admissions and boost gate revenue.",
     description:
       "TourniBase gives tournament managers one place to sell passes, check guests in, and track admission activity while the tournament is still moving.",
+    earlyAccessTitle: "Get early access to a cleaner admissions workflow.",
     benefitsTitle: "Know exactly what is happening at every entrance.",
     benefitsIntro:
       "TourniBase is built to replace paper lists, scattered payment screenshots, and end-of-day revenue guesswork with a live admissions workflow.",
@@ -73,6 +75,7 @@ export const audienceContent: Record<AudienceKey, AudienceContent> = {
     title: "Get through the gate faster and get back to the game.",
     description:
       "TourniBase helps families buy, save, and show passes without hunting for cash, payment screenshots, or the right person at the gate.",
+    earlyAccessTitle: "Join early access for easier tournament weekends.",
     benefitsTitle: "Keep tournament entry simple for the whole family.",
     benefitsIntro:
       "Parents care about convenience, savings, and getting to the court or field on time. TourniBase keeps the pass flow easy before and during the event.",
@@ -111,6 +114,7 @@ export const audienceContent: Record<AudienceKey, AudienceContent> = {
     title: "Organize team entry before the first whistle.",
     description:
       "TourniBase helps coaches see who is ready for event access, which families still need passes, and what needs attention before the team arrives.",
+    earlyAccessTitle: "Help your team arrive ready.",
     benefitsTitle: "Handle pass status before it turns into gate chaos.",
     benefitsIntro:
       "Coaches should not spend tournament mornings answering the same admission questions. TourniBase gives teams a clearer way to coordinate access.",
@@ -218,7 +222,7 @@ export function AudiencePage({ audience }: { audience: AudienceKey }) {
               Early access
             </p>
             <h2 className="mt-2 text-2xl font-bold text-tournibase-navy">
-              {content.benefitsTitle}
+              {content.earlyAccessTitle}
             </h2>
             <p className="mt-3 max-w-3xl leading-7 text-slate-600">
               {content.benefitsIntro}
