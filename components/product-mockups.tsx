@@ -89,7 +89,7 @@ function ParentPassMockup() {
             </div>
 
             <div className="flex h-[660px] flex-col bg-white px-5 pb-5 pt-4">
-              <div className="mb-7 grid grid-cols-[1fr_112px_1fr] items-center text-xs font-bold text-tournibase-navy">
+              <div className="mb-4 grid grid-cols-[1fr_112px_1fr] items-center text-xs font-bold text-tournibase-navy">
                 <span className="-translate-x-1 justify-self-center text-sm">
                   9:41
                 </span>
@@ -110,7 +110,7 @@ function ParentPassMockup() {
                 </div>
               </div>
 
-              <div className="mb-5 flex items-center justify-between">
+              <div className="mb-3 flex items-center justify-between">
                 <div className="relative -ml-3 h-12 w-48">
                   <Image
                     src={tournibaseLogoLockup}
@@ -155,7 +155,7 @@ function ParentPassMockup() {
                   June 14 - June 16, 2026
                 </p>
 
-                <div className="mx-auto mt-7 grid aspect-square w-40 grid-cols-7 gap-1 rounded-xl bg-white p-3 shadow-inner">
+                <div className="mx-auto mt-5 grid aspect-square w-40 grid-cols-7 gap-1 rounded-xl bg-white p-3 shadow-inner">
                   {[
                     1, 1, 0, 1, 0, 1, 1,
                     0, 1, 1, 0, 1, 1, 0,
@@ -176,7 +176,7 @@ function ParentPassMockup() {
                   ))}
                 </div>
 
-                <div className="mt-7 text-center">
+                <div className="mt-5 text-center">
                   <h3 className="text-2xl font-bold">John Smith</h3>
                   <p className="mt-1 text-xs font-semibold text-blue-100">
                     Pass ID: 7F34-A2B9-8C1D
@@ -184,7 +184,7 @@ function ParentPassMockup() {
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-3 grid grid-cols-2 gap-3">
                 <PhoneInfoTile label="Status" value="Paid" />
                 <PhoneInfoTile label="Entrance" value="South doors" />
               </div>
@@ -216,7 +216,7 @@ function PhoneInfoTile({ label, value }: { label: string; value: string }) {
 
 function PassActionRow({ label }: { label: string }) {
   return (
-    <div className="border-t border-tournibase-border px-3 py-3 first:border-t-0">
+    <div className="border-t border-tournibase-border px-4 py-3.5 first:border-t-0">
       <p className="text-sm font-semibold text-tournibase-navy">{label}</p>
     </div>
   );
