@@ -19,3 +19,9 @@ pnpm-debug.log*
 .DS_Store
 .vercel
 tsconfig.tsbuildinfo
+
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.xcodebuildmcp/

@@ -32,9 +32,11 @@ The website includes:
 - coaches section
 - privacy and terms placeholder pages
 
-## iOS App Scope Later
+## iOS App Mockup Scope
 
-The iOS app will later include admission passes, QR check-in, event access, and user-facing tournament workflows. It is not part of this MVP.
+A native SwiftUI mockup now exists in `apps/ios`. It includes role-based spectator, coach, and tournament director experiences; event discovery; mock admission purchase; digital passes; team readiness; revenue and check-in dashboards; and a simulated QR scanner.
+
+The mockup uses local sample data only. Live authentication, Supabase data, payments, camera scanning, Apple Wallet, and production pass validation are not implemented yet.
 
 ## Shared Backend Assumptions
 

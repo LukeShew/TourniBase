@@ -100,6 +100,7 @@ TourniBase is trying to become the standardized admission infrastructure layer f
 - Tailwind CSS
 - Supabase
 - Vercel
+- Native SwiftUI iOS mockup
 
 ## Pages And Features
 
@@ -119,6 +120,24 @@ Supabase project display name: `TourniBase`
 Migration added for `public.waitlist_signups`.
 
 The database ref and environment variable URL stayed the same through the rebrand.
+
+## iOS Mockup Status
+
+A native SwiftUI iOS mockup is available at `apps/ios/TourniBase.xcodeproj`.
+
+The mockup includes:
+
+- Onboarding with spectator, coach, and tournament director role selection
+- Role-specific tab navigation and dashboards
+- Event search, event details, admission options, mock checkout, and purchase confirmation
+- Digital admission wallet with pass details and QR-style entry codes
+- Coach team readiness, guardian pass status, reminders, and tournament schedule
+- Tournament director revenue metrics, admissions chart, venue status, event controls, and simulated scanner results
+- Profile settings and instant demo role switching
+
+The app currently uses local sample data and does not connect to Supabase, payments, live cameras, Apple Wallet, or production pass validation.
+
+The Swift source parses successfully, the Xcode project file and scheme are valid, and the asset catalog JSON is valid. Full build and Simulator verification are blocked until full Xcode and an iOS Simulator runtime are installed on this Mac; only Command Line Tools are currently available.
 
 ## GitHub Status
 

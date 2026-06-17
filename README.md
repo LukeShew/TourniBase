@@ -110,3 +110,13 @@ npm run typecheck
 npm run build
 npm run dev
 ```
+
+## iOS Mockup
+
+The native SwiftUI mockup is in:
+
+```bash
+apps/ios/TourniBase.xcodeproj
+```
+
+See `apps/ios/README.md` for included flows and Xcode setup instructions.
