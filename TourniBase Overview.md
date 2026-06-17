@@ -137,7 +137,17 @@ The mockup includes:
 
 The app currently uses local sample data and does not connect to Supabase, payments, live cameras, Apple Wallet, or production pass validation.
 
-The Swift source parses successfully, the Xcode project file and scheme are valid, and the asset catalog JSON is valid. Full build and Simulator verification are blocked until full Xcode and an iOS Simulator runtime are installed on this Mac; only Command Line Tools are currently available.
+The app builds, installs, and runs successfully in the iPhone 17 Pro simulator on iOS 26.5 with Xcode 26.5.
+
+Simulator verification covered:
+
+- All three onboarding steps and role selection
+- Spectator dashboard, event discovery, event details, mock checkout, purchase confirmation, pass wallet, and pass detail QR view
+- Coach dashboard, team readiness totals, player access statuses, filters, and schedule
+- Tournament director revenue dashboard, admissions chart, venue status, scanner, valid scan feedback, and recent scan history
+- Profile-based switching between spectator, coach, and tournament director roles
+
+The first simulator install exposed missing standard bundle metadata in the custom `Info.plist`. The bundle identifier, executable, package type, version, and development region keys were added, after which the app built and launched successfully without compiler warnings.
 
 ## GitHub Status
 
