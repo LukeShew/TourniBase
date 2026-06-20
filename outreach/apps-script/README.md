@@ -57,7 +57,7 @@ The daily run:
 - Uses one total batch limit of 10.
 - Processes eligible follow-ups first.
 - Uses remaining capacity for eligible first emails.
-- Obeys `DRY_RUN`, `SEND_TEST_TO`, terminal statuses, do-not-contact values, and duplicate checks.
+- Obeys `DRY_RUN`, `SEND_TEST_TO`, terminal statuses, do-not-contact values, and duplicate email and organization checks.
 
 The trigger runs during the configured morning hour in the script's timezone. Google selects the exact minute.
 

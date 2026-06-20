@@ -13,7 +13,7 @@ This folder contains a small Google Sheets and Gmail outreach system for contact
 4. Delete the three fake example rows before adding real leads.
 5. Keep the header names unchanged. The script uses them to find each column.
 
-Do not add the same director more than once. The script also checks normalized email addresses to prevent duplicate sends for each outreach step.
+Do not add the same director more than once. The script checks normalized email addresses and organization names to prevent contacting multiple people from the same organization.
 
 Use only these Status values:
 

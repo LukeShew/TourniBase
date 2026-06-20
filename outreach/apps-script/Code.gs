@@ -281,13 +281,19 @@ function processBatch_(step, limit, previewOnly) {
   var rows = getRows_(sheet, headerMap);
   var tracking = buildEmailTracking_(rows);
   var processedEmails = {};
+  var processedOrganizations = {};
   var processedCount = 0;
 
   for (var index = 0; index < rows.length && processedCount < limit; index += 1) {
     var row = rows[index];
     var email = normalizeEmail_(row.get("Email"));
+    var organization = normalizeOrganization_(row.get("Organization"));
 
-    if (!email || processedEmails[email] || tracking.suppressed[email]) {
+    if (!email ||
+        processedEmails[email] ||
+        (organization && processedOrganizations[organization]) ||
+        tracking.suppressed[email] ||
+        (organization && tracking.suppressedOrganizations[organization])) {
       continue;
     }
 
@@ -303,6 +309,9 @@ function processBatch_(step, limit, previewOnly) {
     }
 
     processedEmails[email] = true;
+    if (organization) {
+      processedOrganizations[organization] = true;
+    }
     processedCount += 1;
   }
 
@@ -313,9 +322,12 @@ function buildEmailTracking_(rows) {
   var firstDone = {};
   var followUpDone = {};
   var suppressed = {};
+  var organizationFirstDone = {};
+  var suppressedOrganizations = {};
 
   rows.forEach(function (row) {
     var email = normalizeEmail_(row.get("Email"));
+    var organization = normalizeOrganization_(row.get("Organization"));
     if (!email) {
       return;
     }
@@ -325,10 +337,16 @@ function buildEmailTracking_(rows) {
 
     if (doNotContact || isTerminalStatus_(status)) {
       suppressed[email] = true;
+      if (organization) {
+        suppressedOrganizations[organization] = true;
+      }
     }
 
     if (row.get("Sent Date") || status === "sent" || status === "followed up") {
       firstDone[email] = true;
+      if (organization) {
+        organizationFirstDone[organization] = true;
+      }
     }
 
     if (row.get("Follow Up Date") || status === "followed up") {
@@ -339,23 +357,29 @@ function buildEmailTracking_(rows) {
   return {
     firstDone: firstDone,
     followUpDone: followUpDone,
-    suppressed: suppressed
+    suppressed: suppressed,
+    organizationFirstDone: organizationFirstDone,
+    suppressedOrganizations: suppressedOrganizations
   };
 }
 
 function isEligibleForStep_(row, step, tracking) {
   var email = normalizeEmail_(row.get("Email"));
+  var organization = normalizeOrganization_(row.get("Organization"));
   var status = normalizeStatus_(row.get("Status"));
 
   if (!email ||
       normalizeBool_(row.get("Do Not Contact")) ||
-      isTerminalStatus_(status)) {
+      isTerminalStatus_(status) ||
+      (organization && tracking.suppressedOrganizations[organization])) {
     return false;
   }
 
   if (step === "first") {
     var notSentStatus = status === "" || status === "not sent";
-    return notSentStatus && !tracking.firstDone[email];
+    return notSentStatus &&
+      !tracking.firstDone[email] &&
+      (!organization || !tracking.organizationFirstDone[organization]);
   }
 
   if (step === "followup") {
@@ -463,6 +487,13 @@ function normalizeEmail_(email) {
 
 function normalizeStatus_(status) {
   return String(status || "").trim().toLowerCase();
+}
+
+function normalizeOrganization_(organization) {
+  return String(organization || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
 }
 
 function removeDailyTrigger_() {
