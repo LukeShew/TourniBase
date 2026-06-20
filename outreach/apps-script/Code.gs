@@ -172,7 +172,7 @@ function renderTemplate_(template, data) {
 
 function buildFirstEmail_(row) {
   var data = {
-    "First Name": row.get("First Name"),
+    "First Name": getGreetingName_(row.get("First Name")),
     "Event Name": row.get("Event Name")
   };
 
@@ -184,7 +184,7 @@ function buildFirstEmail_(row) {
 
 function buildFollowUpEmail_(row) {
   var data = {
-    "First Name": row.get("First Name"),
+    "First Name": getGreetingName_(row.get("First Name")),
     "Event Name": row.get("Event Name")
   };
 
@@ -575,6 +575,17 @@ function normalizeOrganization_(organization) {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ");
+}
+
+function getGreetingName_(firstName) {
+  var cleanName = String(firstName || "").trim();
+  var normalized = cleanName.toLowerCase().replace(/[^a-z]/g, "");
+
+  if (!normalized || normalized === "na" || normalized === "none") {
+    return "there";
+  }
+
+  return cleanName;
 }
 
 function removeDailyTrigger_() {

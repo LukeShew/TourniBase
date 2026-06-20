@@ -48,6 +48,8 @@ Use this order:
 
 Preview functions never send messages and never change the Sheet.
 
+If **First Name** is `NA`, `N/A`, or blank, generated emails use the greeting `Hey there,`.
+
 Draft functions create Gmail drafts using the real recipient, subject, and body. They do not send messages or update Status and dates. After creating a draft, the script records it in the **Draft Created** column.
 
 Examples:

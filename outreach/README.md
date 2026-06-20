@@ -15,6 +15,8 @@ This folder contains a small Google Sheets and Gmail outreach system for contact
 
 Do not add the same director more than once. The script checks normalized email addresses and organization names to prevent contacting multiple people from the same organization.
 
+Use `NA` in **First Name** when an organization only publishes a general inbox. The script automatically turns `NA`, `N/A`, or a blank name into `Hey there,` in both email steps.
+
 Use only these Status values:
 
 - Not sent
