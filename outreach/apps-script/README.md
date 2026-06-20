@@ -24,11 +24,9 @@ Review the permissions and make sure the script is attached to the correct Sheet
 
 ## Safe testing
 
-The checked-in defaults are:
+The checked-in batch setting is:
 
 ```javascript
-var DRY_RUN = true;
-var SEND_TEST_TO = "";
 var BATCH_SIZE = 10;
 ```
 
@@ -37,11 +35,8 @@ Use this order:
 1. Import the CSV and add a few fake `example.com` rows.
 2. Run **Create first-email drafts** to save ready-to-review drafts in the Gmail account running the script.
 3. Review the drafts in Gmail. Nothing is sent and the Sheet tracking fields remain unchanged.
-4. Optionally set `SEND_TEST_TO` to your own email while keeping `DRY_RUN = true`.
-5. Run **Send first-email batch** to receive `[TEST]` messages at your test address.
-6. Clear `SEND_TEST_TO`.
-7. Add real leads only after the output is correct.
-8. Set `DRY_RUN = false` only when you are ready to send.
+4. Send approved drafts manually from Gmail.
+5. Update Status and the appropriate sent-date column in the Sheet.
 
 If **First Name** is `NA`, `N/A`, or blank, generated emails use the greeting `Hey there,`.
 
@@ -54,4 +49,4 @@ Examples:
 
 Repeated clicks skip recipients that already have a marker for that outreach step. The marker remains after a draft is sent or deleted.
 
-When `DRY_RUN = true`, send functions do not change Status or sent dates. They write `DRY RUN - not sent` to **Last Error**. If `SEND_TEST_TO` is set, they also send test copies only to that address.
+The script creates drafts only. It cannot send emails directly.

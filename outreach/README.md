@@ -40,22 +40,9 @@ Use only these Status values:
 
 If the menu does not appear, run `onOpen` once from the Apps Script editor and approve the requested permissions.
 
-## 3. Configure safe test mode
+## 3. Safe operation
 
-At the top of `Code.gs`, leave:
-
-```javascript
-var DRY_RUN = true;
-var SEND_TEST_TO = "";
-```
-
-With `DRY_RUN` set to `true`:
-
-- If `SEND_TEST_TO` is blank, no email is sent. The generated subject and body are written to the Apps Script execution log.
-- If `SEND_TEST_TO` contains your email, test messages are sent only to that address with `[TEST]` added to the subject.
-- A dry-run send updates **Last Error** to `DRY RUN - not sent` but does not change Status or sent dates.
-
-Do not put a personal email address in the repository. Add it only inside the copy of `Code.gs` in your private Google Sheet.
+The script only creates Gmail drafts. It has no direct-send menu option or email-sending function.
 
 ## 4. Create Gmail drafts
 
@@ -66,19 +53,13 @@ To save eligible messages in the Gmail account that owns/runs the Sheet script, 
 
 Draft creation does not send messages or change Status and sent dates. The script records each created draft in the **Draft Created** column, for example `First email: 2026-06-20`. Repeated clicks skip rows that already have a marker for that outreach step. A later follow-up marker is appended to the same cell.
 
-## 5. Send the first 10 emails
+## 5. Send the first emails
 
-1. Confirm the preview output.
-2. Change `DRY_RUN` to `false` in your private Apps Script copy.
-3. Save the script.
-4. In the Sheet, click **TourniBase Outreach > Send first-email batch**.
-5. Approve permissions if Google asks.
-
-The script sends up to 10 eligible first emails. Successful rows change to **Sent**, and **Sent Date** is set to the current date.
+Open Gmail, review each generated draft, and send it manually. After sending, change Status to **Sent** and enter the date in **Sent Date**.
 
 ## 6. Send follow-ups
 
-Use **TourniBase Outreach > Send follow-up batch**.
+Use **TourniBase Outreach > Create follow-up drafts**, then review and send them manually in Gmail.
 
 A follow-up is eligible only when:
 
@@ -86,7 +67,7 @@ A follow-up is eligible only when:
 - **Sent Date** is at least three days old.
 - No follow-up has already been recorded for that email.
 
-Successful rows change to **Followed up**, and **Follow Up Date** is set to the current date.
+After sending, change Status to **Followed up** and enter the date in **Follow Up Date**.
 
 ## 7. Avoid spammy behavior
 

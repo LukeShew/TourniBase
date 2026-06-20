@@ -1,11 +1,8 @@
 /**
  * TourniBase outreach automation for a Google Sheet tab named "Outreach".
  *
- * Keep DRY_RUN true until at least three generated messages have been reviewed.
- * Do not commit a personal email address into SEND_TEST_TO.
+ * Creates reviewable Gmail drafts. This script does not send email.
  */
-var DRY_RUN = true;
-var SEND_TEST_TO = "";
 var BATCH_SIZE = 10;
 var FOLLOW_UP_DELAY_DAYS = 3;
 var SHEET_NAME = "Outreach";
@@ -65,9 +62,6 @@ var REQUIRED_HEADERS = [
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu("TourniBase Outreach")
-    .addItem("Send first-email batch", "sendFirstEmailBatch")
-    .addItem("Send follow-up batch", "sendFollowUpBatch")
-    .addSeparator()
     .addItem("Create first-email drafts", "createFirstEmailDrafts")
     .addItem("Create follow-up drafts", "createFollowUpDrafts")
     .addToUi();
@@ -185,16 +179,6 @@ function buildFollowUpEmail_(row) {
   };
 }
 
-function sendFirstEmailBatch() {
-  var count = processBatch_("first", BATCH_SIZE, false);
-  notify_("First-email batch processed: " + count + " message(s).");
-}
-
-function sendFollowUpBatch() {
-  var count = processBatch_("followup", BATCH_SIZE, false);
-  notify_("Follow-up batch processed: " + count + " message(s).");
-}
-
 function createFirstEmailDrafts() {
   var count = createDraftBatch_("first", BATCH_SIZE);
   notify_("First-email drafts created: " + count + ". Check Gmail > Drafts.");
@@ -203,49 +187,6 @@ function createFirstEmailDrafts() {
 function createFollowUpDrafts() {
   var count = createDraftBatch_("followup", BATCH_SIZE);
   notify_("Follow-up drafts created: " + count + ". Check Gmail > Drafts.");
-}
-
-function processBatch_(step, limit, previewOnly) {
-  var sheet = getSheet_();
-  var headerMap = getHeaderMap_(sheet);
-  var rows = getRows_(sheet, headerMap);
-  var tracking = buildEmailTracking_(rows);
-  var processedEmails = {};
-  var processedOrganizations = {};
-  var processedCount = 0;
-
-  for (var index = 0; index < rows.length && processedCount < limit; index += 1) {
-    var row = rows[index];
-    var email = normalizeEmail_(row.get("Email"));
-    var organization = normalizeOrganization_(row.get("Organization"));
-
-    if (!email ||
-        processedEmails[email] ||
-        (organization && processedOrganizations[organization]) ||
-        tracking.suppressed[email] ||
-        (organization && tracking.suppressedOrganizations[organization])) {
-      continue;
-    }
-
-    if (!isEligibleForStep_(row, step, tracking)) {
-      continue;
-    }
-
-    var message = step === "first" ? buildFirstEmail_(row) : buildFollowUpEmail_(row);
-    logMessage_(row, email, step, message, previewOnly);
-
-    if (!previewOnly) {
-      sendOrRecord_(sheet, headerMap, row, email, step, message);
-    }
-
-    processedEmails[email] = true;
-    if (organization) {
-      processedOrganizations[organization] = true;
-    }
-    processedCount += 1;
-  }
-
-  return processedCount;
 }
 
 function createDraftBatch_(step, limit) {
@@ -399,53 +340,6 @@ function hasWaitedRequiredDays_(sentDateValue) {
   var elapsedMs = now.getTime() - sentDate.getTime();
   var requiredMs = FOLLOW_UP_DELAY_DAYS * 24 * 60 * 60 * 1000;
   return elapsedMs >= requiredMs;
-}
-
-function sendOrRecord_(sheet, headerMap, row, email, step, message) {
-  var lastErrorColumn = headerMap["Last Error"] + 1;
-
-  try {
-    if (DRY_RUN) {
-      if (String(SEND_TEST_TO || "").trim()) {
-        GmailApp.sendEmail(
-          String(SEND_TEST_TO).trim(),
-          "[TEST] " + message.subject,
-          "Original recipient: " + email + "\n\n" + message.body
-        );
-      }
-
-      sheet.getRange(row.rowNumber, lastErrorColumn).setValue("DRY RUN - not sent");
-      return;
-    }
-
-    GmailApp.sendEmail(email, message.subject, message.body);
-
-    var statusColumn = headerMap["Status"] + 1;
-    var dateColumn = step === "first"
-      ? headerMap["Sent Date"] + 1
-      : headerMap["Follow Up Date"] + 1;
-    var nextStatus = step === "first" ? "Sent" : "Followed up";
-
-    sheet.getRange(row.rowNumber, statusColumn).setValue(nextStatus);
-    sheet.getRange(row.rowNumber, dateColumn).setValue(formatToday_());
-    sheet.getRange(row.rowNumber, lastErrorColumn).clearContent();
-  } catch (error) {
-    var messageText = error && error.message ? error.message : String(error);
-    sheet.getRange(row.rowNumber, lastErrorColumn).setValue(messageText);
-    Logger.log("Row %s failed: %s", row.rowNumber, messageText);
-  }
-}
-
-function logMessage_(row, email, step, message, previewOnly) {
-  Logger.log(
-    "%s %s | Row %s | To: %s\nSubject: %s\n\n%s",
-    previewOnly ? "PREVIEW" : (DRY_RUN ? "DRY RUN" : "SEND"),
-    step === "first" ? "FIRST EMAIL" : "FOLLOW-UP",
-    row.rowNumber,
-    email,
-    message.subject,
-    message.body
-  );
 }
 
 function parseSheetDate_(value) {

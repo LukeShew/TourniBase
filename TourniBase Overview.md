@@ -187,7 +187,7 @@ The paid domain can wait until there is enough waitlist validation.
 - Do not create folders outside this project folder unless explicitly allowed.
 - Leave the local repo committed when changes are complete so pushing to GitHub is one click.
 - Include the local website link at the end of every chat.
-- A standalone Google Sheets and Gmail outreach automation package is available in `outreach/`. It includes a lead sheet template, email templates, safe dry-run defaults, automatic `NA`-to-`Hey there` greeting handling, compact domain-only source-link labels, duplicate-safe Gmail draft creation tracked visibly in the Sheet, a simplified draft/send menu with no daily automation, duplicate email and organization protection, do-not-contact handling, setup documentation, and a live Google Sheets results dashboard for conversion rates, status breakdowns, and actions needed.
+- A standalone Google Sheets and Gmail outreach automation package is available in `outreach/`. It includes a lead sheet template, email templates, automatic `NA`-to-`Hey there` greeting handling, compact domain-only source-link labels, duplicate-safe Gmail draft creation tracked visibly in the Sheet, a draft-only menu with no automated sending or daily automation, duplicate email and organization protection, do-not-contact handling, setup documentation, and a live Google Sheets results dashboard for conversion rates, status breakdowns, and actions needed.
 
 ## Local Website Instructions
 
