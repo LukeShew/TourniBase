@@ -1,0 +1,4 @@
+First Name,Last Name,Email,Organization,Event Name,Source Link,State,Region,Status,Sent Date,Follow Up Date,Reply Notes,Do Not Contact,Last Error
+Taylor,Reed,taylor.reed@example.com,Example Hoops,Example Spring Classic,https://example.com/events/spring-classic,OH,Midwest,Not sent,,,,FALSE,
+Morgan,Lee,morgan.lee@example.com,Sample Sports,Sample Summer Shootout,https://example.com/events/summer-shootout,GA,Southeast,Sent,2026-01-15,,,FALSE,
+Casey,Jordan,casey.jordan@example.com,Demo Athletics,Demo Winter Invitational,https://example.com/events/winter-invitational,PA,Northeast,Do not contact,,,Requested no further contact,TRUE,
