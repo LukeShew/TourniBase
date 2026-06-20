@@ -335,6 +335,7 @@ function createDraftBatch_(step, limit) {
   var headerMap = getHeaderMap_(sheet);
   var rows = getRows_(sheet, headerMap);
   var tracking = buildEmailTracking_(rows);
+  var existingDraftEmails = getExistingDraftEmails_();
   var processedEmails = {};
   var processedOrganizations = {};
   var createdCount = 0;
@@ -349,6 +350,8 @@ function createDraftBatch_(step, limit) {
         (organization && processedOrganizations[organization]) ||
         tracking.suppressed[email] ||
         (organization && tracking.suppressedOrganizations[organization]) ||
+        existingDraftEmails[email] ||
+        hasDraftRecord_(step, email) ||
         !isEligibleForStep_(row, step, tracking)) {
       continue;
     }
@@ -357,6 +360,8 @@ function createDraftBatch_(step, limit) {
 
     try {
       GmailApp.createDraft(email, message.subject, message.body);
+      saveDraftRecord_(step, email);
+      existingDraftEmails[email] = true;
       Logger.log(
         "DRAFT CREATED | Row %s | To: %s | Subject: %s",
         row.rowNumber,
@@ -377,6 +382,44 @@ function createDraftBatch_(step, limit) {
   }
 
   return createdCount;
+}
+
+function getExistingDraftEmails_() {
+  var draftEmails = {};
+
+  GmailApp.getDrafts().forEach(function (draft) {
+    var recipients = String(draft.getMessage().getTo() || "").split(",");
+
+    recipients.forEach(function (recipient) {
+      var angleBracketMatch = recipient.match(/<([^>]+)>/);
+      var email = normalizeEmail_(angleBracketMatch ? angleBracketMatch[1] : recipient);
+
+      if (email) {
+        draftEmails[email] = true;
+      }
+    });
+  });
+
+  return draftEmails;
+}
+
+function hasDraftRecord_(step, email) {
+  return PropertiesService.getScriptProperties()
+    .getProperty(getDraftRecordKey_(step, email)) !== null;
+}
+
+function saveDraftRecord_(step, email) {
+  PropertiesService.getScriptProperties().setProperty(
+    getDraftRecordKey_(step, email),
+    formatToday_()
+  );
+}
+
+function getDraftRecordKey_(step, email) {
+  return "DRAFT_CREATED_" +
+    String(step).toUpperCase() +
+    "_" +
+    normalizeEmail_(email);
 }
 
 function buildEmailTracking_(rows) {

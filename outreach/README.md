@@ -69,7 +69,7 @@ To save the eligible messages in the Gmail account that owns/runs the Sheet scri
 - **TourniBase Outreach > Create first-email drafts**
 - **TourniBase Outreach > Create follow-up drafts**
 
-Draft creation does not send messages or change Status and sent dates. Repeatedly running a draft command creates another set of drafts, so run it once and review Gmail’s **Drafts** folder.
+Draft creation does not send messages or change Status and sent dates. Before creating anything, the script checks existing Gmail drafts and its permanent draft history. Repeated clicks skip email addresses that already received a draft for that outreach step.
 
 ## 5. Send the first 10 emails
 
