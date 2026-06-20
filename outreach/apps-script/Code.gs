@@ -9,8 +9,6 @@ var SEND_TEST_TO = "";
 var BATCH_SIZE = 10;
 var FOLLOW_UP_DELAY_DAYS = 3;
 var SHEET_NAME = "Outreach";
-var DAILY_TRIGGER_FUNCTION = "runDailyOutreach";
-var DAILY_TRIGGER_HOUR = 9;
 
 var FIRST_EMAIL_SUBJECT = "Question about gate admissions";
 var FIRST_EMAIL_BODY = [
@@ -205,22 +203,6 @@ function createFirstEmailDrafts() {
 function createFollowUpDrafts() {
   var count = createDraftBatch_("followup", BATCH_SIZE);
   notify_("Follow-up drafts created: " + count + ". Check Gmail > Drafts.");
-}
-
-/**
- * Daily automation uses one shared batch limit. Follow-ups are processed first,
- * then remaining capacity is used for first emails.
- */
-function runDailyOutreach() {
-  var followUpCount = processBatch_("followup", BATCH_SIZE, false);
-  var remaining = Math.max(0, BATCH_SIZE - followUpCount);
-  var firstEmailCount = remaining > 0 ? processBatch_("first", remaining, false) : 0;
-
-  Logger.log(
-    "Daily outreach processed %s follow-up(s) and %s first email(s).",
-    followUpCount,
-    firstEmailCount
-  );
 }
 
 function processBatch_(step, limit, previewOnly) {

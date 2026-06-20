@@ -17,6 +17,8 @@ Do not add the same director more than once. The script checks normalized email 
 
 Use `NA` in **First Name** when an organization only publishes a general inbox. The script automatically turns `NA`, `N/A`, or a blank name into `Hey there,` in both email steps.
 
+In **Source Link**, preserve the full event or organization URL but display only its domain without `https://` or `www.`. Example: a link to an Exposure Events detail page should display as `basketball.exposureevents.com`.
+
 Use only these Status values:
 
 - Not sent
