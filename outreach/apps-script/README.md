@@ -48,12 +48,14 @@ Use this order:
 
 Preview functions never send messages and never change the Sheet.
 
-Draft functions create Gmail drafts using the real recipient, subject, and body. They do not send messages or update Status and dates. Before creating a draft, the script checks:
+Draft functions create Gmail drafts using the real recipient, subject, and body. They do not send messages or update Status and dates. After creating a draft, the script records it in the **Draft Created** column.
 
-- Whether Gmail currently has a draft addressed to that email.
-- Whether this Apps Script project has ever created a draft for that email and outreach step.
+Examples:
 
-Repeated clicks therefore skip previously drafted recipients, including drafts that were later deleted. Script draft history remains stored in Apps Script Properties.
+- `First email: 2026-06-20`
+- `First email: 2026-06-20; Follow-up: 2026-06-24`
+
+Repeated clicks skip recipients that already have a marker for that outreach step. The marker remains after a draft is sent or deleted.
 
 When `DRY_RUN = true`, send functions do not change Status or sent dates. They write `DRY RUN - not sent` to **Last Error**. If `SEND_TEST_TO` is set, they also send test copies only to that address.
 

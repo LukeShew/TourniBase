@@ -60,7 +60,8 @@ var REQUIRED_HEADERS = [
   "Follow Up Date",
   "Reply Notes",
   "Do Not Contact",
-  "Last Error"
+  "Last Error",
+  "Draft Created"
 ];
 
 function onOpen() {
@@ -335,7 +336,6 @@ function createDraftBatch_(step, limit) {
   var headerMap = getHeaderMap_(sheet);
   var rows = getRows_(sheet, headerMap);
   var tracking = buildEmailTracking_(rows);
-  var existingDraftEmails = getExistingDraftEmails_();
   var processedEmails = {};
   var processedOrganizations = {};
   var createdCount = 0;
@@ -350,8 +350,7 @@ function createDraftBatch_(step, limit) {
         (organization && processedOrganizations[organization]) ||
         tracking.suppressed[email] ||
         (organization && tracking.suppressedOrganizations[organization]) ||
-        existingDraftEmails[email] ||
-        hasDraftRecord_(step, email) ||
+        hasDraftMarker_(row.get("Draft Created"), step) ||
         !isEligibleForStep_(row, step, tracking)) {
       continue;
     }
@@ -360,8 +359,7 @@ function createDraftBatch_(step, limit) {
 
     try {
       GmailApp.createDraft(email, message.subject, message.body);
-      saveDraftRecord_(step, email);
-      existingDraftEmails[email] = true;
+      writeDraftMarker_(sheet, headerMap, row, step);
       Logger.log(
         "DRAFT CREATED | Row %s | To: %s | Subject: %s",
         row.rowNumber,
@@ -384,42 +382,21 @@ function createDraftBatch_(step, limit) {
   return createdCount;
 }
 
-function getExistingDraftEmails_() {
-  var draftEmails = {};
-
-  GmailApp.getDrafts().forEach(function (draft) {
-    var recipients = String(draft.getMessage().getTo() || "").split(",");
-
-    recipients.forEach(function (recipient) {
-      var angleBracketMatch = recipient.match(/<([^>]+)>/);
-      var email = normalizeEmail_(angleBracketMatch ? angleBracketMatch[1] : recipient);
-
-      if (email) {
-        draftEmails[email] = true;
-      }
-    });
-  });
-
-  return draftEmails;
+function hasDraftMarker_(value, step) {
+  var marker = step === "first" ? "first email:" : "follow-up:";
+  return String(value || "").toLowerCase().indexOf(marker) !== -1;
 }
 
-function hasDraftRecord_(step, email) {
-  return PropertiesService.getScriptProperties()
-    .getProperty(getDraftRecordKey_(step, email)) !== null;
-}
+function writeDraftMarker_(sheet, headerMap, row, step) {
+  var existingValue = String(row.get("Draft Created") || "").trim();
+  var label = step === "first" ? "First email" : "Follow-up";
+  var marker = label + ": " + formatToday_();
+  var nextValue = existingValue ? existingValue + "; " + marker : marker;
 
-function saveDraftRecord_(step, email) {
-  PropertiesService.getScriptProperties().setProperty(
-    getDraftRecordKey_(step, email),
-    formatToday_()
-  );
-}
-
-function getDraftRecordKey_(step, email) {
-  return "DRAFT_CREATED_" +
-    String(step).toUpperCase() +
-    "_" +
-    normalizeEmail_(email);
+  sheet.getRange(
+    row.rowNumber,
+    headerMap["Draft Created"] + 1
+  ).setValue(nextValue);
 }
 
 function buildEmailTracking_(rows) {
