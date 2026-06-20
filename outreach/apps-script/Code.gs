@@ -70,15 +70,8 @@ function onOpen() {
     .addItem("Send first-email batch", "sendFirstEmailBatch")
     .addItem("Send follow-up batch", "sendFollowUpBatch")
     .addSeparator()
-    .addItem("Preview next first-email batch", "previewFirstEmailBatch")
-    .addItem("Preview next follow-up batch", "previewFollowUpBatch")
     .addItem("Create first-email drafts", "createFirstEmailDrafts")
     .addItem("Create follow-up drafts", "createFollowUpDrafts")
-    .addSeparator()
-    .addItem("Mark selected rows as Do Not Contact", "markSelectedRowsDoNotContact")
-    .addSeparator()
-    .addItem("Setup daily trigger", "setupDailyTrigger")
-    .addItem("Remove daily trigger", "removeDailyTrigger")
     .addToUi();
 }
 
@@ -204,16 +197,6 @@ function sendFollowUpBatch() {
   notify_("Follow-up batch processed: " + count + " message(s).");
 }
 
-function previewFirstEmailBatch() {
-  var count = processBatch_("first", BATCH_SIZE, true);
-  notify_("First-email preview generated: " + count + " message(s). Check the execution logs.");
-}
-
-function previewFollowUpBatch() {
-  var count = processBatch_("followup", BATCH_SIZE, true);
-  notify_("Follow-up preview generated: " + count + " message(s). Check the execution logs.");
-}
-
 function createFirstEmailDrafts() {
   var count = createDraftBatch_("first", BATCH_SIZE);
   notify_("First-email drafts created: " + count + ". Check Gmail > Drafts.");
@@ -238,54 +221,6 @@ function runDailyOutreach() {
     followUpCount,
     firstEmailCount
   );
-}
-
-function markSelectedRowsDoNotContact() {
-  var sheet = getSheet_();
-  var headerMap = getHeaderMap_(sheet);
-  var selection = sheet.getActiveRange();
-
-  if (!selection) {
-    notify_("Select at least one lead row first.");
-    return;
-  }
-
-  var firstRow = Math.max(2, selection.getRow());
-  var lastRow = selection.getLastRow();
-
-  if (lastRow < 2) {
-    notify_("Select at least one lead row below the header.");
-    return;
-  }
-
-  var rowCount = lastRow - firstRow + 1;
-  var doNotContactColumn = headerMap["Do Not Contact"] + 1;
-  var statusColumn = headerMap["Status"] + 1;
-  var lastErrorColumn = headerMap["Last Error"] + 1;
-
-  sheet.getRange(firstRow, doNotContactColumn, rowCount, 1).setValue(true);
-  sheet.getRange(firstRow, statusColumn, rowCount, 1).setValue("Do not contact");
-  sheet.getRange(firstRow, lastErrorColumn, rowCount, 1).clearContent();
-
-  notify_(rowCount + " row(s) marked Do Not Contact.");
-}
-
-function setupDailyTrigger() {
-  removeDailyTrigger_();
-
-  ScriptApp.newTrigger(DAILY_TRIGGER_FUNCTION)
-    .timeBased()
-    .everyDays(1)
-    .atHour(DAILY_TRIGGER_HOUR)
-    .inTimezone(Session.getScriptTimeZone())
-    .create();
-
-  notify_("Daily outreach trigger created.");
-}
-
-function removeDailyTrigger() {
-  var removed = removeDailyTrigger_();
-  notify_(removed + " daily outreach trigger(s) removed.");
 }
 
 function processBatch_(step, limit, previewOnly) {
@@ -586,19 +521,6 @@ function getGreetingName_(firstName) {
   }
 
   return cleanName;
-}
-
-function removeDailyTrigger_() {
-  var removed = 0;
-
-  ScriptApp.getProjectTriggers().forEach(function (trigger) {
-    if (trigger.getHandlerFunction() === DAILY_TRIGGER_FUNCTION) {
-      ScriptApp.deleteTrigger(trigger);
-      removed += 1;
-    }
-  });
-
-  return removed;
 }
 
 function notify_(message) {

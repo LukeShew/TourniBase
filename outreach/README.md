@@ -55,18 +55,9 @@ With `DRY_RUN` set to `true`:
 
 Do not put a personal email address in the repository. Add it only inside the copy of `Code.gs` in your private Google Sheet.
 
-## 4. Preview messages
+## 4. Create Gmail drafts
 
-Keep `DRY_RUN = true`, then use:
-
-- **TourniBase Outreach > Preview next first-email batch**
-- **TourniBase Outreach > Preview next follow-up batch**
-
-Open **Extensions > Apps Script > Executions**, select the latest execution, and read its logs.
-
-Preview at least three generated first emails. Confirm the names and event names look normal before enabling real sending. Preview functions never send email or update rows.
-
-To save the eligible messages in the Gmail account that owns/runs the Sheet script, use:
+To save eligible messages in the Gmail account that owns/runs the Sheet script, use:
 
 - **TourniBase Outreach > Create first-email drafts**
 - **TourniBase Outreach > Create follow-up drafts**
@@ -112,12 +103,7 @@ The daily trigger uses one shared limit of 10 messages. It processes eligible fo
 
 ## 8. Mark someone as Do Not Contact
 
-1. Select any cells in the rows you want to block.
-2. Click **TourniBase Outreach > Mark selected rows as Do Not Contact**.
-
-The script sets **Do Not Contact** to `TRUE` and Status to **Do not contact**.
-
-You can also manually enter `TRUE`, `yes`, `y`, or `1` in the **Do Not Contact** column.
+Check the box in the **Do Not Contact** column and change Status to **Do not contact**.
 
 ## 9. Track replies manually
 
@@ -130,11 +116,3 @@ When a director replies:
 3. Set **Do Not Contact** to `TRUE` when the person opts out or should not receive another message.
 
 Terminal statuses are always skipped.
-
-## Daily trigger
-
-Use **TourniBase Outreach > Setup daily trigger** to create one daily run. The trigger remains safe while `DRY_RUN` is `true`.
-
-Use **TourniBase Outreach > Remove daily trigger** to remove it.
-
-Google chooses the exact minute within the configured morning hour. See `apps-script/README.md` for permission and testing details.
