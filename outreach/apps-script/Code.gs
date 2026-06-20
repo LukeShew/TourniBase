@@ -71,6 +71,8 @@ function onOpen() {
     .addSeparator()
     .addItem("Preview next first-email batch", "previewFirstEmailBatch")
     .addItem("Preview next follow-up batch", "previewFollowUpBatch")
+    .addItem("Create first-email drafts", "createFirstEmailDrafts")
+    .addItem("Create follow-up drafts", "createFollowUpDrafts")
     .addSeparator()
     .addItem("Mark selected rows as Do Not Contact", "markSelectedRowsDoNotContact")
     .addSeparator()
@@ -211,6 +213,16 @@ function previewFollowUpBatch() {
   notify_("Follow-up preview generated: " + count + " message(s). Check the execution logs.");
 }
 
+function createFirstEmailDrafts() {
+  var count = createDraftBatch_("first", BATCH_SIZE);
+  notify_("First-email drafts created: " + count + ". Check Gmail > Drafts.");
+}
+
+function createFollowUpDrafts() {
+  var count = createDraftBatch_("followup", BATCH_SIZE);
+  notify_("Follow-up drafts created: " + count + ". Check Gmail > Drafts.");
+}
+
 /**
  * Daily automation uses one shared batch limit. Follow-ups are processed first,
  * then remaining capacity is used for first emails.
@@ -316,6 +328,55 @@ function processBatch_(step, limit, previewOnly) {
   }
 
   return processedCount;
+}
+
+function createDraftBatch_(step, limit) {
+  var sheet = getSheet_();
+  var headerMap = getHeaderMap_(sheet);
+  var rows = getRows_(sheet, headerMap);
+  var tracking = buildEmailTracking_(rows);
+  var processedEmails = {};
+  var processedOrganizations = {};
+  var createdCount = 0;
+
+  for (var index = 0; index < rows.length && createdCount < limit; index += 1) {
+    var row = rows[index];
+    var email = normalizeEmail_(row.get("Email"));
+    var organization = normalizeOrganization_(row.get("Organization"));
+
+    if (!email ||
+        processedEmails[email] ||
+        (organization && processedOrganizations[organization]) ||
+        tracking.suppressed[email] ||
+        (organization && tracking.suppressedOrganizations[organization]) ||
+        !isEligibleForStep_(row, step, tracking)) {
+      continue;
+    }
+
+    var message = step === "first" ? buildFirstEmail_(row) : buildFollowUpEmail_(row);
+
+    try {
+      GmailApp.createDraft(email, message.subject, message.body);
+      Logger.log(
+        "DRAFT CREATED | Row %s | To: %s | Subject: %s",
+        row.rowNumber,
+        email,
+        message.subject
+      );
+      createdCount += 1;
+    } catch (error) {
+      var messageText = error && error.message ? error.message : String(error);
+      sheet.getRange(row.rowNumber, headerMap["Last Error"] + 1).setValue(messageText);
+      Logger.log("Row %s draft failed: %s", row.rowNumber, messageText);
+    }
+
+    processedEmails[email] = true;
+    if (organization) {
+      processedOrganizations[organization] = true;
+    }
+  }
+
+  return createdCount;
 }
 
 function buildEmailTracking_(rows) {

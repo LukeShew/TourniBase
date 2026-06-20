@@ -38,13 +38,17 @@ Use this order:
 2. Run **Preview next first-email batch**.
 3. Inspect the execution logs.
 4. Preview at least three personalized messages.
-5. Optionally set `SEND_TEST_TO` to your own email while keeping `DRY_RUN = true`.
-6. Run **Send first-email batch** to receive `[TEST]` messages at your test address.
-7. Clear `SEND_TEST_TO`.
-8. Add real leads only after the output is correct.
-9. Set `DRY_RUN = false` only when you are ready to send.
+5. Run **Create first-email drafts** to save ready-to-review drafts in the Gmail account running the script.
+6. Review the drafts in Gmail. Nothing is sent and the Sheet tracking fields remain unchanged.
+7. Optionally set `SEND_TEST_TO` to your own email while keeping `DRY_RUN = true`.
+8. Run **Send first-email batch** to receive `[TEST]` messages at your test address.
+9. Clear `SEND_TEST_TO`.
+10. Add real leads only after the output is correct.
+11. Set `DRY_RUN = false` only when you are ready to send.
 
 Preview functions never send messages and never change the Sheet.
+
+Draft functions create Gmail drafts using the real recipient, subject, and body. They do not send messages or update Status and dates. Running the same draft function again creates duplicate drafts.
 
 When `DRY_RUN = true`, send functions do not change Status or sent dates. They write `DRY RUN - not sent` to **Last Error**. If `SEND_TEST_TO` is set, they also send test copies only to that address.
 

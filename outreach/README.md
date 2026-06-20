@@ -64,6 +64,13 @@ Open **Extensions > Apps Script > Executions**, select the latest execution, and
 
 Preview at least three generated first emails. Confirm the names and event names look normal before enabling real sending. Preview functions never send email or update rows.
 
+To save the eligible messages in the Gmail account that owns/runs the Sheet script, use:
+
+- **TourniBase Outreach > Create first-email drafts**
+- **TourniBase Outreach > Create follow-up drafts**
+
+Draft creation does not send messages or change Status and sent dates. Repeatedly running a draft command creates another set of drafts, so run it once and review Gmail’s **Drafts** folder.
+
 ## 5. Send the first 10 emails
 
 1. Confirm the preview output.
