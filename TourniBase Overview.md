@@ -19,18 +19,17 @@ or native app.
 
 | Item | Current state |
 | --- | --- |
-| Progress | Phases 1–17 of 19 complete |
-| Current phase | Phase 17 local-only demo data complete |
-| Next phase | Phase 18 quality checks, not started |
+| Progress | Phases 1–18 of 19 complete |
+| Current phase | Phase 18 quality checks complete |
+| Next phase | Phase 19 final Git review and MVP handoff, not started |
 | Live web app | [tournibase-web-app.vercel.app](https://tournibase-web-app.vercel.app) |
 | Payments | Stripe test mode |
-| Database | Live schema matches all 11 committed migrations |
+| Database | 11 product migrations live; 1 local demo permission migration |
 | Main launch dependency | Production receipt and pass-link email delivery |
 
 Remaining numbered phases:
 
-1. Phase 18: run install, lint, typecheck, and production build checks.
-2. Phase 19: complete the final Git review and MVP handoff.
+1. Phase 19: complete the final Git review and MVP handoff.
 
 Before accepting real customer payments, TourniBase must also:
 
@@ -181,7 +180,7 @@ Web MVP documentation:
 - Refund and dispute workflows are not automated.
 - Demo data is available only through a guarded local seed command that blocks
   hosted Supabase URLs.
-- Final quality and release checks remain in Phases 18 and 19.
+- Final Git review and MVP handoff remain in Phase 19.
 
 ## Postponed Projects
 
