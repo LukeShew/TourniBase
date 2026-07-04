@@ -1,217 +1,255 @@
 # TourniBase Overview
 
-## What The Product Currently Is
+Last updated and verified: July 4, 2026
 
-TourniBase is currently a role-based waitlist website for a youth sports tournament admission platform.
+## Current Product
 
-## Company Vision
+TourniBase is currently a web-based digital gate system for youth basketball
+tournaments.
 
-TourniBase is being built to become the standard admission, check-in, and revenue platform for youth sports tournaments.
+The web MVP in `apps/tournibase-web-app` is the main product. It lets tournament
+directors sell spectator passes, issue mobile tickets, scan guests at the gate,
+block duplicate entry, recover buyers through order lookup, and review sales and
+attendance.
 
-The long-term vision is that a parent or spectator should never have to think about tournament admission logistics again. They should not have to wonder whether a tournament accepts cash, Venmo, Zelle, PayPal, Square, Apple Pay, or some other payment method. They should not have to download a new app while standing in line. They should not have to create an account at the entrance of a crowded gym with poor cell service. They should not have to repeat the same frustrating process every weekend during a travel sports season.
+TourniBase is validating this focused product before building a larger platform
+or native app.
 
-Instead, TourniBase should make tournament admission simple and predictable.
+## Current MVP Status
 
-A spectator creates one TourniBase account, saves one payment method, and uses that same system across every participating tournament. Before arriving at an event, they can purchase a weekend pass, single-day pass, or other admission option directly through TourniBase. When they arrive, they open their pass, show it at the gate, and receive entry through a fast, consistent check-in process.
+| Item | Current state |
+| --- | --- |
+| Progress | Phases 1–16 of 19 complete |
+| Current phase | Phase 16 documentation complete |
+| Next phase | Phase 17 local-only demo data, not started |
+| Live web app | [tournibase-web-app.vercel.app](https://tournibase-web-app.vercel.app) |
+| Payments | Stripe test mode |
+| Database | Live schema matches all 11 committed migrations |
+| Main launch dependency | Production receipt and pass-link email delivery |
 
-The easiest way to understand the vision is that TourniBase should do for youth sports tournament admission what EZ Pass did for toll roads. Spectators should no longer need to worry about how each individual tournament collects admission. If the tournament uses TourniBase, the process is already known.
+Remaining numbered phases:
 
-However, TourniBase is not just a payment app for parents.
+1. Phase 17: add safe, local-only demo data.
+2. Phase 18: run install, lint, typecheck, and production build checks.
+3. Phase 19: complete the final Git review and MVP handoff.
 
-The larger opportunity is on the tournament operator side.
+Before accepting real customer payments, TourniBase must also:
 
-Youth sports tournament admissions are currently fragmented and poorly managed. Many tournament operators rely on a mix of cash, Venmo, Zelle, PayPal, Square, manual wristbands, paper lists, and informal gate processes. This creates inconsistent spectator experiences, slows down entry, increases cash handling, makes reconciliation harder, and gives tournament directors limited visibility into admission revenue and attendance.
+- Add transactional receipt and mobile pass email.
+- Switch the Stripe secret key, publishable key, and production webhook to live
+  mode together.
+- Complete a real purchase, webhook, pass-delivery, and gate-scan test.
+- Confirm live Stripe totals match TourniBase reporting.
+- Define a basic tournament-day support and refund process.
 
-TourniBase should become the operating layer for tournament admissions.
+This status section must be updated after every completed phase or material MVP
+change so it always shows what is live and what remains.
 
-For tournament directors, TourniBase should provide a centralized system to create events, configure admission options, sell passes, verify entry, track revenue, and understand attendance. A tournament director should be able to create an event, set pricing for weekend passes and single-day passes, generate a registration link, send that link to coaches, and have coaches distribute it to parents, families, and spectators before the tournament begins.
+Detailed tracker:
+[`apps/tournibase-web-app/docs/implementation-roadmap.md`](apps/tournibase-web-app/docs/implementation-roadmap.md)
 
-Once the event is live, TourniBase should give the tournament operator real-time visibility into admissions. The platform should show total revenue, revenue by day, revenue by venue, revenue by admission type, weekend pass sales, single-day pass sales, total admissions, check-ins, entry volume by hour, peak admission periods, and historical event trends.
+## What Works Now
 
-The goal is to replace scattered, manual admission processes with one clean system.
+### Tournament director
 
-TourniBase should help tournament operators reduce cash handling, speed up gate lines, prevent admission fraud, simplify reconciliation, improve reporting, and make better operational decisions. Instead of checking multiple payment platforms and manually calculating revenue after the event, tournament directors should be able to open one dashboard and immediately understand how the event performed.
+- Invite-only password login
+- Protected dashboard and organization ownership
+- Tournament creation with dates, venue, organizer, contact, and public slug
+- Ticket type creation, editing, activation, and deactivation
+- Draft and published event controls
+- Temporary scanner links with permissions, expiration, and revocation
+- Coach and parent sharing tools
+- Printable public-checkout gate poster
+- Sales, revenue, attendance, and gate-activity dashboards
 
-Entry verification is also a core part of the vision. TourniBase needs to make it easy for gate workers to confirm that a spectator has a valid pass while making it difficult for people to share or duplicate admissions through screenshots. The final technical method may involve dynamic QR codes, time-sensitive passes, rotating validation screens, or another anti-fraud system, but the objective is clear: valid spectators should enter quickly, and invalid or duplicated passes should be easy to detect.
+### Parent or spectator
 
-The company should initially focus on youth basketball tournaments because that is where the problem was first observed and where the admission experience is especially fragmented. Many families attend tournaments repeatedly throughout the season, and tournament environments are often crowded, rushed, and inconsistent. Basketball provides a focused starting niche with frequent events, repeat spectators, and clear operational pain.
+- Public tournament ticket page
+- Ticket selection and buyer contact form
+- Stripe-hosted test checkout
+- One individual mobile pass for each purchased admission
+- Branded QR code on each pass
+- Event, ticket, date, buyer, venue, order, and support details
 
-Over time, TourniBase could expand into other tournament-based youth sports, including volleyball, baseball, softball, soccer, wrestling, and other environments where spectators regularly pay admission. The broader market is not limited to basketball. The real target is any youth sports tournament ecosystem where admission is paid, fragmented, and manually managed.
+### Gate staff
 
-TourniBase should be positioned as:
+- Mobile camera scanning
+- Manual pass-link or token entry
+- Server-authoritative pass validation
+- Atomic duplicate blocking
+- Reasoned duplicate overrides
+- Check-in undo
+- Buyer and order lookup
+- Manual pass check-in
+- Persisted recent scanner activity
+- Optional cash, Venmo, external-card, and comp sale recording
 
-The standard admission and check-in platform for youth sports tournaments.
+### Director reporting
 
-The original problem was simple: parents do not know how to pay.
+- Gross online sales and estimated payout
+- Online and manual admission totals
+- Revenue by ticket type and sale date
+- Successful, duplicate, invalid, and wrong-day scans
+- Manual check-in and override totals
+- Active scanner-link and unscanned-pass totals
 
-The larger problem is more important: tournament admissions are fragmented, inconsistent, and poorly managed.
+## Core MVP Flow
 
-That distinction matters because TourniBase should not be built as just another payment option. It should be built as tournament admission infrastructure. Payment standardization is the wedge, but admissions management, check-in, revenue tracking, attendance analytics, and operational visibility are the larger business.
+1. A director logs in and creates a tournament.
+2. The director creates active ticket types and publishes the public event.
+3. A parent opens the ticket page and pays through Stripe Checkout.
+4. A signed Stripe success event marks the order paid and creates one pass per
+   admission.
+5. The buyer opens each individual mobile pass from the success page.
+6. Gate staff open a temporary scanner link and scan the pass QR.
+7. Postgres validates the scanner, tournament, order, pass, valid date, and
+   prior admissions atomically.
+8. A valid pass returns green and checks in. A second use is blocked.
+9. The director reviews sales and gate activity from the dashboard.
 
-The platform creates value for spectators by giving them one consistent way to purchase and use admission across tournaments.
+Production pass-link email is not built yet. The payment success page is the
+current automatic delivery method.
 
-The platform creates value for tournament directors by giving them one system to manage admissions, collect revenue, verify entry, and understand event performance.
+## Current Product Boundary
 
-The ultimate vision is that TourniBase becomes the default system people expect to use when attending youth sports tournaments. Parents should assume they can use TourniBase before they arrive. Tournament operators should see TourniBase as the simplest way to run admissions. Gate workers should have a fast and reliable way to check people in. Coaches should be able to send one clean link to families. Organizers should have better control over revenue and attendance.
+The MVP is digital tournament admission, not full tournament management.
 
-TourniBase is not trying to become a casual payment app.
+Not included right now:
 
-TourniBase is trying to become the standardized admission infrastructure layer for youth sports tournaments.
+- Tournament scheduling or brackets
+- Team registration or rosters
+- Scores or standings
+- Referee or gym scheduling
+- Full card-terminal point of sale
+- Automated refunds or dispute handling
 
-## What Works
+The product should stay focused on admission until real tournament use proves
+which adjacent features matter.
 
-- Role-first homepage with a concise hero, centered header navigation, contact email shortcut, refined audience card copy for each role, aligned card text/buttons, bold role buttons, and progressive disclosure
-- Dedicated audience pages for tournament directors, parents/spectators, and coaches with role-specific benefits, mockups, and stronger signup prompts
-- Director and coach dashboards are shown inside iPad Pro-style frames with corrected power/volume controls and bottom home indicators, while keeping the existing dashboard content
-- Coach mockup shows clearer roster states for checked in, pass-ready, and not-registered players
-- Coach page stats use clearer readiness copy with "for arrival"
-- Parent page stats emphasize a unified payment processor
-- Parent page uses a realistic iPhone-style pass mockup with TourniBase branding, paid status, entrance info, a less uniform QR-style code, a cleaner single Next pass row, and a muted iPhone-style home indicator shifted farther down near the bottom of the phone screen
-- Parent phone mockup uses a visibly larger scaled TourniBase logo lockup aligned near the left edge of the pass card, tuned status-bar positioning with a larger time, iOS-style cell/battery indicators, corrected side buttons, and a smaller static bell notification icon
-- Parent phone mockup action rows use clearer spacing below the pass details, with the phone header and pass stack shifted up to give the bottom actions more room
-- Parent phone mockup uses John Smith as the sample pass holder
-- Waitlist forms require email, name, and organization/team, with directors using an Organization-only label
-- Role-page hero content keeps full-size spacing with normal top whitespace above the role copy
-- Site header uses the transparent TourniBase logo lockup at an oversized display size while keeping the original header height
-- Footer keeps its original overall height while using a larger TourniBase logo whose visible mark aligns with the contact line
-- Role-page waitlist sections keep the CTA focused by removing the extra explanatory paragraph
-- Role-page early-access promo headlines are separate from the "Why it matters" headlines, avoiding repeated section copy
-- Coach early-access promo now emphasizes preparing families for entry
-- Waitlist form with default and locked role support
-- Audience-specific waitlist source values
-- Email validation
-- Loading, success, and error states
-- Shared footer with TourniBase contact email
-- Supabase migration for waitlist storage
-- Placeholder privacy and terms pages
-
-## What Does Not Work Yet
-
-- No live tournament admission
-- No QR pass system
-- No dashboard
-- No auth
-- No payment processing
-
-## Current Tech Stack
+## Current Technology
 
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- Supabase
-- Vercel
-- Native SwiftUI iOS mockup
+- Supabase Auth, Postgres, Row Level Security, and migrations
+- Stripe-hosted Checkout and signed webhooks
+- Vercel hosting
+- ZXing browser camera scanning
 
-## Pages And Features
+The web app uses tournament-local IANA time zones. New tournaments currently
+default to `America/New_York`, and device location or VPN usage does not change
+pass validity.
 
-- `/` role-first audience selection page with short role taglines and clear role buttons
-- `/organizers` tournament director page with organizer-specific mockup and waitlist flow
-- `/parents` parent/spectator page with family-specific mockup and waitlist flow
-- `/coaches` coach page with team-specific mockup and waitlist flow
-- `/privacy` placeholder privacy page
-- `/terms` placeholder terms page
+## Web MVP Repositories and Services
 
-## Supabase Status
+The web MVP is fully separate from the postponed waitlist website.
 
-Supabase project: `saxkpxzqwnwjqcjypysu`
+- Local app:
+  `apps/tournibase-web-app`
+- GitHub:
+  [LukeShew/tournibase-web-app](https://github.com/LukeShew/tournibase-web-app)
+- Vercel:
+  [tournibase-web-app.vercel.app](https://tournibase-web-app.vercel.app)
+- Supabase project ref:
+  `khwaafsdtgiymucppkmo`
 
-Supabase project display name: `TourniBase`
+Web MVP documentation:
 
-Migration added for `public.waitlist_signups`.
+- [Product plan](apps/tournibase-web-app/docs/mvp-product-plan.md)
+- [Architecture](apps/tournibase-web-app/docs/mvp-architecture.md)
+- [Database schema](apps/tournibase-web-app/docs/database-schema.md)
+- [Implementation roadmap](apps/tournibase-web-app/docs/implementation-roadmap.md)
+- [Setup and test guide](apps/tournibase-web-app/README.md)
 
-The database ref and environment variable URL stayed the same through the rebrand.
+## Security Status
 
-## iOS Mockup Status
+- All 10 public web-app tables have Row Level Security enabled.
+- Anonymous users can read only published tournaments and active ticket types.
+- Orders, passes, scanner sessions, check-ins, and manual sales are private.
+- Director data is restricted through organization ownership.
+- Supabase and Stripe secret keys remain server-only.
+- Scanner credentials expire, can be revoked, and are stored only as hashes.
+- Gate validation functions are unavailable to browser roles.
+- Stripe card details never pass through TourniBase.
 
-A native SwiftUI iOS mockup is available at `apps/ios/TourniBase.xcodeproj`.
+## Known MVP Limitations
 
-The mockup includes:
+- Automated receipt and pass-link email is not implemented.
+- Stripe is in test mode.
+- Director accounts are created manually through Supabase.
+- Gate-sale recording tracks external payment but does not charge a card.
+- Refund and dispute workflows are not automated.
+- Demo data has not been added yet.
+- Final quality and release checks remain in Phases 18 and 19.
 
-- Onboarding with spectator, coach, and tournament director role selection
-- Role-specific tab navigation and dashboards
-- Event search, event details, admission options, mock checkout, and purchase confirmation
-- Digital admission wallet with pass details and QR-style entry codes
-- Coach team readiness, guardian pass status, reminders, and tournament schedule
-- Tournament director revenue metrics, admissions chart, venue status, event controls, and simulated scanner results
-- Profile settings and instant demo role switching
+## Postponed Projects
 
-The app currently uses local sample data and does not connect to Supabase, payments, live cameras, Apple Wallet, or production pass validation.
+### Waitlist Website
 
-The app builds, installs, and runs successfully in the iPhone 17 Pro simulator on iOS 26.5 with Xcode 26.5.
+The waitlist website is postponed. It is not the current MVP and should not
+drive current product decisions.
 
-Simulator verification covered:
+It remains separate:
 
-- All three onboarding steps and role selection
-- Spectator dashboard, event discovery, event details, mock checkout, purchase confirmation, pass wallet, and pass detail QR view
-- Coach dashboard, team readiness totals, player access statuses, filters, and schedule
-- Tournament director revenue dashboard, admissions chart, venue status, scanner, valid scan feedback, and recent scan history
-- Profile-based switching between spectator, coach, and tournament director roles
+- Local code: the root waitlist-site repository
+- GitHub: [LukeShew/TourniBase](https://github.com/LukeShew/TourniBase)
+- Vercel: [tourni-base.vercel.app](https://tourni-base.vercel.app)
+- Supabase project ref: `saxkpxzqwnwjqcjypysu`
 
-The first simulator install exposed missing standard bundle metadata in the custom `Info.plist`. The bundle identifier, executable, package type, version, and development region keys were added, after which the app built and launched successfully without compiler warnings.
+No new waitlist features are planned during the web MVP phases. Existing
+waitlist code and data should remain intact for possible future marketing use.
 
-## GitHub Status
+### Native iOS App
 
-The local website code, package metadata, README, contract, and overview doc now use the TourniBase name.
+The SwiftUI project at `apps/ios/TourniBase.xcodeproj` is a postponed product
+mockup. It uses local sample data and does not connect to live Supabase,
+payments, cameras, or production pass validation.
 
-Repository: `https://github.com/LukeShew/TourniBase`
+A native iOS and Android product may become the long-term direction after the
+web MVP proves demand. Until then, web-first access is the better fit because
+parents and gate staff do not need to install an app at a tournament.
 
-Local Git remote `origin` points to `https://github.com/LukeShew/TourniBase.git`.
+## Long-Term Direction
 
-Keep work committed after changes so the GitHub push button can push `main` to `origin/main`.
+The long-term goal is for TourniBase to become the standard admission and
+check-in platform for youth sports tournaments.
 
-## Folder Rename Status
+The current wedge is deliberately narrow:
 
-The local project root is now `/Users/lukeshewmaker/Documents/Codex Sandbox/TourniBase`.
+- Give parents one predictable way to buy and show admission.
+- Give directors one system for sales, gate control, and reporting.
+- Give gate staff a fast, reliable admission decision.
 
-Source files, docs, package metadata, and Git remote settings no longer reference the old `FanPass` project folder. The ignored `.next` cache previously contained stale absolute paths from the old folder and was cleared so local dev can rebuild from the TourniBase root.
+Youth basketball is the starting market. Expansion to other sports, a shared
+spectator account, saved payment methods, and native apps should follow only
+after the web admission workflow is validated.
 
-GitHub Desktop may still show the TourniBase repository as missing if its local app cache points to the old `FanPass` folder. Use GitHub Desktop's `Locate...` button and choose `/Users/lukeshewmaker/Documents/Codex Sandbox/TourniBase`, or remove the missing repo entry and add the existing TourniBase folder again.
+## Other Project Assets
 
-## Vercel Status
+- Brand assets are in `TourniBase logos/`.
+- Outreach tools are in `outreach/`.
+- Do not create project folders outside this TourniBase folder unless explicitly
+  approved.
 
-The live Vercel waitlist site is available at `https://tourni-base.vercel.app/`.
+## Workflow
 
-Local Vercel project metadata is not present in this workspace. Vercel dashboard-only deployment URLs may still show older generated deployment names, but the public production domain is the TourniBase URL above.
+- Update this file after every completed web MVP phase or material scope change.
+- Keep the web app and waitlist repositories separate.
+- Commit only the intended repository changes.
+- Do not commit environment files or secrets.
+- Leave local repository changes ready for the user’s one-click GitHub Desktop
+  push.
 
-The paid domain can wait until there is enough waitlist validation.
-
-## Brand Asset Status
-
-- Current production logo source: `TourniBase logos/tournibase-transparent-logo-lockup.png`
-- Use only files in `TourniBase logos/` for TourniBase branding.
-- Do not touch the files labeled as unavailable for use unless explicitly instructed.
-
-## Workflow Notes
-
-- After each prompt that changes the project, update this overview doc unless literally nothing changed.
-- Do not create folders outside this project folder unless explicitly allowed.
-- Leave the local repo committed when changes are complete so pushing to GitHub is one click.
-- Include the local website link at the end of every chat.
-- A standalone Google Sheets and Gmail outreach automation package is available in `outreach/`. It includes a lead sheet template, email templates, automatic `NA`-to-`Hey there` greeting handling, compact domain-only source-link labels, duplicate-safe Gmail draft creation tracked visibly in the Sheet, a draft-only menu with no automated sending or daily automation, duplicate email and organization protection, do-not-contact handling, setup documentation, and a live Google Sheets results dashboard for conversion rates, status breakdowns, and actions needed.
-
-## Local Website Instructions
+## Local Web MVP
 
 ```bash
+cd apps/tournibase-web-app
 npm install
 npm run dev
 ```
 
 Open:
 
-```bash
+```text
 http://localhost:3000
 ```
-
-## Live Website Link
-
-https://tourni-base.vercel.app/
-
-## Risks And Limitations
-
-- The waitlist form will not submit unless Supabase public env vars are configured.
-- Legal pages are placeholders and should be replaced before a paid launch.
-
-## Recommended Next Improvements
-
-- Confirm the live Vercel waitlist form inserts into Supabase.
-- Replace placeholder legal pages before launch.
