@@ -19,17 +19,18 @@ or native app.
 
 | Item | Current state |
 | --- | --- |
-| Progress | Phases 1–18 of 19 complete |
-| Current phase | Phase 18 quality checks complete |
-| Next phase | Phase 19 final Git review and MVP handoff, not started |
+| Progress | All 19 numbered phases complete |
+| Current phase | Phase 19 final Git review and MVP handoff complete |
+| Next phase | No numbered build phase remains |
 | Live web app | [tournibase-web-app.vercel.app](https://tournibase-web-app.vercel.app) |
 | Payments | Stripe test mode |
-| Database | 11 product migrations live; 1 local demo permission migration |
+| Database | Live and local histories match all 11 product migrations |
 | Main launch dependency | Production receipt and pass-link email delivery |
 
-Remaining numbered phases:
-
-1. Phase 19: complete the final Git review and MVP handoff.
+No numbered phases remain. The
+[Final MVP Handoff](apps/tournibase-web-app/docs/mvp-handoff.md) records routes,
+environment variables, database state, local testing, limitations, and launch
+work.
 
 Before accepting real customer payments, TourniBase must also:
 
@@ -158,6 +159,7 @@ Web MVP documentation:
 - [Database schema](apps/tournibase-web-app/docs/database-schema.md)
 - [Local demo data](apps/tournibase-web-app/docs/demo-data.md)
 - [Implementation roadmap](apps/tournibase-web-app/docs/implementation-roadmap.md)
+- [Final MVP handoff](apps/tournibase-web-app/docs/mvp-handoff.md)
 - [Setup and test guide](apps/tournibase-web-app/README.md)
 
 ## Security Status
@@ -176,11 +178,13 @@ Web MVP documentation:
 - Automated receipt and pass-link email is not implemented.
 - Stripe is in test mode.
 - Director accounts are created manually through Supabase.
+- Supabase leaked-password protection is unavailable on the current plan, so
+  invited directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
 - Refund and dispute workflows are not automated.
 - Demo data is available only through a guarded local seed command that blocks
   hosted Supabase URLs.
-- Final Git review and MVP handoff remain in Phase 19.
+- All numbered build phases are complete.
 
 ## Postponed Projects
 
