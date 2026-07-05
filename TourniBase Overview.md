@@ -2,18 +2,38 @@
 
 Last updated and verified: July 5, 2026
 
+## Product Positioning
+
+TourniBase's long-term goal is to become the go-to admissions operating system
+for youth sports tournaments. The broader vision is not limited to basketball.
+
+The current wedge is intentionally narrow: youth basketball tournament
+admission control.
+
+TourniBase is focused on solving two tournament-day problems at the gate:
+
+- **Shorter, smoother lines:** Give spectators a cleaner way to buy, access,
+  and present passes so they can enter faster with less gate friction.
+- **Fraud prevention:** Give gate staff one system for validating passes and
+  preventing duplicate entry, reused or shared passes, and other admission
+  leakage.
+
+The current product should not be presented as a general tournament-management
+platform. It is an admission-control product for youth basketball tournaments,
+with broader youth-sports admission as the long-term direction.
+
 ## Current Product
 
-TourniBase is currently a web-based digital gate system for youth basketball
-tournaments.
+TourniBase is currently a web-based admission-control system for youth
+basketball tournaments.
 
 The web MVP in `apps/tournibase-web-app` is the main product. It lets tournament
 directors sell spectator passes, issue mobile tickets, scan guests at the gate,
 block duplicate entry, recover buyers through order lookup, and review sales and
 attendance.
 
-TourniBase is validating this focused product before building a larger platform
-or native app.
+TourniBase is validating this focused admission product before expanding to
+other youth sports or building native apps.
 
 ## Current MVP Status
 
@@ -130,6 +150,15 @@ Not included right now:
 The product should stay focused on admission until real tournament use proves
 which adjacent features matter.
 
+## Monetization Direction
+
+TourniBase should be free for tournament directors during the initial adoption
+period. The current Stripe setup does not take a TourniBase platform fee.
+
+Later, TourniBase may use Stripe Connect to keep a platform fee from ticket
+sales and may add a monthly fee for TourniBase services. Those fees should not
+be activated until the product has proven its value with real tournament use.
+
 ## Current Technology
 
 - Next.js App Router
@@ -223,14 +252,16 @@ parents and gate staff do not need to install an app at a tournament.
 
 ## Long-Term Direction
 
-The long-term goal is for TourniBase to become the standard admission and
-check-in platform for youth sports tournaments.
+The long-term goal is for TourniBase to become the go-to admissions operating
+system for youth sports tournaments broadly, not just basketball.
 
 The current wedge is deliberately narrow:
 
-- Give parents one predictable way to buy and show admission.
-- Give directors one system for sales, gate control, and reporting.
-- Give gate staff a fast, reliable admission decision.
+- Make entry lines shorter and smoother by giving spectators one predictable
+  way to buy, access, and present passes.
+- Reduce admission fraud and leakage by preventing duplicate entry and reused
+  or shared passes.
+- Give directors and gate staff one reliable admission-control system.
 
 Youth basketball is the starting market. Expansion to other sports, a shared
 spectator account, saved payment methods, and native apps should follow only
