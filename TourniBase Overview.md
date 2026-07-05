@@ -42,11 +42,11 @@ other youth sports or building native apps.
 | Progress | All 19 numbered phases complete |
 | Current phase | Phase 19 final Git review and MVP handoff complete |
 | Next phase | No numbered build phase remains |
-| Live web app | [tournibase-web-app.vercel.app](https://tournibase-web-app.vercel.app) |
+| Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Stripe test mode |
 | Database | Live and local histories match all 12 product migrations |
-| Email | Template, delivery tracking, duplicate protection, and retry foundation complete; real sending disabled |
-| Main launch dependency | Choose an email provider and domain, then activate and test production delivery |
+| Email | Resend selected; domain verified; adapter built and tested locally; real delivery not activated |
+| Main launch dependency | Deploy and activate Resend, then complete the end-to-end email test |
 
 No numbered phases remain. The
 [Final MVP Handoff](apps/tournibase-web-app/docs/mvp-handoff.md) records routes,
@@ -55,8 +55,8 @@ work.
 
 Before accepting real customer payments, TourniBase must also:
 
-- Choose an email provider, verify a sending domain, add its adapter and key,
-  then activate the completed pass-email foundation.
+- Deploy and activate the completed Resend adapter, then verify one order email
+  containing every issued pass link.
 - Switch the Stripe secret key, publishable key, and production webhook to live
   mode together.
 - Complete a real purchase, webhook, pass-delivery, and gate-scan test.
@@ -166,7 +166,8 @@ be activated until the product has proven its value with real tournament use.
 - Tailwind CSS
 - Supabase Auth, Postgres, Row Level Security, and migrations
 - Stripe-hosted Checkout and signed webhooks
-- React Email template rendering with provider-neutral delivery tracking
+- React Email template rendering, Resend delivery, and provider-neutral
+  delivery tracking
 - Vercel hosting
 - ZXing browser camera scanning
 
@@ -183,7 +184,9 @@ The web MVP is fully separate from the postponed waitlist website.
 - GitHub:
   [LukeShew/tournibase-web-app](https://github.com/LukeShew/tournibase-web-app)
 - Vercel:
-  [tournibase-web-app.vercel.app](https://tournibase-web-app.vercel.app)
+  [tournibase.com](https://tournibase.com)
+- Transactional email:
+  Resend with the verified `tournibase.com` sender domain
 - Supabase project ref:
   `khwaafsdtgiymucppkmo`
 
@@ -211,8 +214,8 @@ Web MVP documentation:
 
 ## Known MVP Limitations
 
-- The pass-email foundation is complete, but no provider or sending domain is
-  connected, so real emails are not sent.
+- The Resend pass-email adapter is complete locally, but it has not been
+  deployed, activated, and verified through a full test purchase yet.
 - Stripe is in test mode.
 - Director accounts are created manually through Supabase.
 - Supabase leaked-password protection is unavailable on the current plan, so
