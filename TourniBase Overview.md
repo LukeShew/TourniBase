@@ -45,8 +45,10 @@ other youth sports or building native apps.
 | Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Stripe test mode |
 | Database | Live and local histories match all 12 product migrations |
-| Email | Resend selected; domain verified; adapter built and tested locally; real delivery not activated |
-| Main launch dependency | Deploy and activate Resend, then complete the end-to-end email test |
+| Email | Live through Resend; first end-to-end test delivered successfully on the first attempt |
+| Pass retrieval | Success page and automated email with every individual pass link |
+| Next product priority | Add offline-friendly pass retrieval through Apple Wallet, Google Wallet, and a simple download fallback |
+| Main launch dependency | Move Stripe to live mode, run a real low-value purchase, and define support and refunds |
 
 No numbered phases remain. The
 [Final MVP Handoff](apps/tournibase-web-app/docs/mvp-handoff.md) records routes,
@@ -55,8 +57,6 @@ work.
 
 Before accepting real customer payments, TourniBase must also:
 
-- Deploy and activate the completed Resend adapter, then verify one order email
-  containing every issued pass link.
 - Switch the Stripe secret key, publishable key, and production webhook to live
   mode together.
 - Complete a real purchase, webhook, pass-delivery, and gate-scan test.
@@ -89,6 +89,7 @@ Detailed tracker:
 - Ticket selection and buyer contact form
 - Stripe-hosted test checkout
 - One individual mobile pass for each purchased admission
+- Automated TourniBase confirmation email containing every purchased pass link
 - Branded QR code on each pass
 - Event, ticket, date, buyer, venue, order, and support details
 
@@ -121,18 +122,18 @@ Detailed tracker:
 3. A parent opens the ticket page and pays through Stripe Checkout.
 4. A signed Stripe success event marks the order paid and creates one pass per
    admission.
-5. TourniBase prepares one confirmation email containing every individual pass
-   link. Real sending remains disabled until a provider and domain are added.
-6. The buyer can always open each mobile pass from the success page.
+5. TourniBase sends one confirmation email containing every individual pass
+   link through Resend.
+6. The buyer can open each mobile pass from the email or payment success page.
 7. Gate staff open a temporary scanner link and scan the pass QR.
 8. Postgres validates the scanner, tournament, order, pass, valid date, and
    prior admissions atomically.
 9. A valid pass returns green and checks in. A second use is blocked.
 10. The director reviews sales and gate activity from the dashboard.
 
-The pass-email template and retry-safe delivery system are built. Production
-sending remains disabled, so the payment success page is still the current
-automatic delivery method.
+The pass-email template, retry-safe delivery system, verified sender domain,
+and production Resend transport are live. The first end-to-end purchase test
+sent exactly one email on the first delivery attempt.
 
 ## Current Product Boundary
 
@@ -214,8 +215,11 @@ Web MVP documentation:
 
 ## Known MVP Limitations
 
-- The Resend pass-email adapter is complete locally, but it has not been
-  deployed, activated, and verified through a full test purchase yet.
+- Apple Wallet and Google Wallet passes are not implemented yet. Buyers
+  currently retrieve passes through the confirmation email or success page.
+- The scanner still needs an internet connection for authoritative validation
+  and duplicate blocking. Customer-side offline pass storage does not make the
+  scanner work offline.
 - Stripe is in test mode.
 - Director accounts are created manually through Supabase.
 - Supabase leaked-password protection is unavailable on the current plan, so
