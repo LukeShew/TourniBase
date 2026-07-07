@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 5, 2026
+Last updated and verified: July 7, 2026
 
 ## Product Positioning
 
@@ -46,9 +46,9 @@ other youth sports or building native apps.
 | Payments | Stripe test mode |
 | Database | Live and local histories match all 12 product migrations |
 | Email | Live through Resend; first end-to-end test delivered successfully on the first attempt |
-| Pass retrieval | Success page and automated email with every individual pass link |
-| Next product priority | Add offline-friendly pass retrieval through Apple Wallet, Google Wallet, and a simple download fallback |
-| Main launch dependency | Move Stripe to live mode, run a real low-value purchase, and define support and refunds |
+| Pass retrieval | Success page, automated email, mobile pass page, and device-save page for weak service |
+| Next product priority | Verify latest deployment, complete a light redesign, then prepare Stripe live mode |
+| Main launch dependency | Move Stripe to live mode and run a real low-value purchase, email, pass, refund, and gate-scan test |
 
 No numbered phases remain. The
 [Final MVP Handoff](apps/tournibase-web-app/docs/mvp-handoff.md) records routes,
@@ -61,7 +61,8 @@ Before accepting real customer payments, TourniBase must also:
   mode together.
 - Complete a real purchase, webhook, pass-delivery, and gate-scan test.
 - Confirm live Stripe totals match TourniBase reporting.
-- Define a basic tournament-day support and refund process.
+- Complete the planned light redesign before the first official live test.
+- Confirm the manual refund/support process works in live mode.
 
 This status section must be updated after every completed phase or material MVP
 change so it always shows what is live and what remains.
@@ -76,6 +77,8 @@ Detailed tracker:
 - Invite-only password login
 - Protected dashboard and organization ownership
 - Tournament creation with dates, venue, organizer, contact, and public slug
+- Event detail editing for names, dates, venue, description, organizer, and
+  contact email
 - Ticket type creation, editing, activation, and deactivation
 - Draft and published event controls
 - Temporary scanner links with permissions, expiration, and revocation
@@ -90,7 +93,10 @@ Detailed tracker:
 - Stripe-hosted test checkout
 - One individual mobile pass for each purchased admission
 - Automated TourniBase confirmation email containing every purchased pass link
+  and a device-save link
 - Branded QR code on each pass
+- Device-save page for saving a backup pass image to Photos or Files before
+  arriving at the venue
 - Event, ticket, date, buyer, venue, order, and support details
 
 ### Gate staff
@@ -124,7 +130,8 @@ Detailed tracker:
    admission.
 5. TourniBase sends one confirmation email containing every individual pass
    link through Resend.
-6. The buyer can open each mobile pass from the email or payment success page.
+6. The buyer can open each mobile pass from the email or payment success page,
+   or use the device-save page before arriving if venue service may be weak.
 7. Gate staff open a temporary scanner link and scan the pass QR.
 8. Postgres validates the scanner, tournament, order, pass, valid date, and
    prior admissions atomically.
@@ -216,7 +223,8 @@ Web MVP documentation:
 ## Known MVP Limitations
 
 - Apple Wallet and Google Wallet passes are not implemented yet. Buyers
-  currently retrieve passes through the confirmation email or success page.
+  currently retrieve passes through the confirmation email, success page,
+  mobile pass page, or device-save page.
 - The scanner still needs an internet connection for authoritative validation
   and duplicate blocking. Customer-side offline pass storage does not make the
   scanner work offline.
@@ -225,7 +233,8 @@ Web MVP documentation:
 - Supabase leaked-password protection is unavailable on the current plan, so
   invited directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
-- Refund and dispute workflows are not automated.
+- Refund requests still require manual Stripe action. Full-refund webhook sync
+  blocks refunded passes once Stripe sends the event to TourniBase.
 - Demo data is available only through a guarded local seed command that blocks
   hosted Supabase URLs.
 - All numbered build phases are complete.
