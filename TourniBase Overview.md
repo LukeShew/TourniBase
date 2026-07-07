@@ -83,7 +83,6 @@ Detailed tracker:
 - Draft and published event controls
 - Temporary scanner links with permissions, expiration, and revocation
 - Coach and parent sharing tools
-- Printable public-checkout gate poster
 - Sales, revenue, attendance, and gate-activity dashboards
 
 ### Parent or spectator
