@@ -47,6 +47,8 @@ other youth sports or building native apps.
 | Database | Live and local histories match all 12 product migrations |
 | Email | Live through Resend; first end-to-end test delivered successfully on the first attempt |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page for weak service |
+| Refund support | Manual Stripe refunds with automatic full-refund invalidation and TourniBase refund email |
+| Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support in the web app |
 | Next product priority | Verify latest deployment, complete a light redesign, then prepare Stripe live mode |
 | Main launch dependency | Move Stripe to live mode and run a real low-value purchase, email, pass, refund, and gate-scan test |
 
@@ -93,6 +95,7 @@ Detailed tracker:
 - One individual mobile pass for each purchased admission
 - Automated TourniBase confirmation email containing every purchased pass link
   and a device-save link
+- Automated TourniBase refund confirmation email after Stripe refund webhooks
 - Branded QR code on each pass
 - Device-save page for saving a backup pass image to Photos or Files before
   arriving at the venue
@@ -136,6 +139,9 @@ Detailed tracker:
    prior admissions atomically.
 9. A valid pass returns green and checks in. A second use is blocked.
 10. The director reviews sales and gate activity from the dashboard.
+11. If an order is refunded in Stripe, TourniBase syncs the latest refund
+    status, emails the buyer, and fully invalidates active or checked-in passes
+    on full refunds.
 
 The pass-email template, retry-safe delivery system, verified sender domain,
 and production Resend transport are live. The first end-to-end purchase test
@@ -173,6 +179,7 @@ be activated until the product has proven its value with real tournament use.
 - Tailwind CSS
 - Supabase Auth, Postgres, Row Level Security, and migrations
 - Stripe-hosted Checkout and signed webhooks
+- TourniBase refund sync and refund confirmation emails
 - React Email template rendering, Resend delivery, and provider-neutral
   delivery tracking
 - Vercel hosting
@@ -233,7 +240,10 @@ Web MVP documentation:
   invited directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
 - Refund requests still require manual Stripe action. Full-refund webhook sync
-  blocks refunded passes once Stripe sends the event to TourniBase.
+  blocks refunded passes and emails the buyer once Stripe sends the event to
+  TourniBase.
+- Footer legal/support pages are baseline MVP pages, not a replacement for
+  legal review before higher-volume use.
 - Demo data is available only through a guarded local seed command that blocks
   hosted Supabase URLs.
 - All numbered build phases are complete.
