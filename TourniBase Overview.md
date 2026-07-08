@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 7, 2026
+Last updated and verified: July 8, 2026
 
 ## Product Positioning
 
@@ -49,7 +49,7 @@ other youth sports or building native apps.
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page for weak service |
 | Refund support | Manual Stripe refunds with automatic full-refund invalidation and TourniBase refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support in the web app |
-| Next product priority | Verify latest deployment, complete a light redesign, then prepare Stripe live mode |
+| Next product priority | Finish and verify the light redesign, discuss the future monetization path, then prepare Stripe live mode |
 | Main launch dependency | Move Stripe to live mode and run a real low-value purchase, email, pass, refund, and gate-scan test |
 
 No numbered phases remain. The
@@ -64,6 +64,8 @@ Before accepting real customer payments, TourniBase must also:
 - Complete a real purchase, webhook, pass-delivery, and gate-scan test.
 - Confirm live Stripe totals match TourniBase reporting.
 - Complete the planned light redesign before the first official live test.
+- Discuss the future path to monetization while keeping the first director
+  pilots free to reduce adoption friction.
 - Confirm the manual refund/support process works in live mode.
 
 This status section must be updated after every completed phase or material MVP
