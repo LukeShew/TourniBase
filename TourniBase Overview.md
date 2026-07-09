@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 8, 2026
+Last updated and verified: July 9, 2026
 
 ## Product Positioning
 
@@ -49,7 +49,7 @@ other youth sports or building native apps.
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page for weak service |
 | Refund support | Manual Stripe refunds with automatic full-refund invalidation and TourniBase refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support in the web app |
-| Next product priority | Finish and verify the light redesign, discuss the future monetization path, then prepare Stripe live mode |
+| Next product priority | Finish and verify the light redesign, discuss future monetization, clean up this overview doc’s positioning, review competitors, then prepare Stripe live mode |
 | Main launch dependency | Move Stripe to live mode and run a real low-value purchase, email, pass, refund, and gate-scan test |
 
 No numbered phases remain. The
@@ -65,7 +65,10 @@ Before accepting real customer payments, TourniBase must also:
 - Confirm live Stripe totals match TourniBase reporting.
 - Complete the planned light redesign before the first official live test.
 - Discuss the future path to monetization while keeping the first director
-  pilots free to reduce adoption friction.
+  pilots free to reduce adoption friction. Use that same discussion to clean up
+  this overview doc’s wording, remove stale/repetitive framing from older
+  phases, and clarify how TourniBase should position itself against or between
+  market competitors.
 - Confirm the manual refund/support process works in live mode.
 
 This status section must be updated after every completed phase or material MVP
@@ -87,7 +90,7 @@ Detailed tracker:
 - Draft and published event controls
 - Temporary scanner links with permissions, expiration, and revocation
 - Coach and parent sharing tools
-- Sales, revenue, attendance, and gate-activity dashboards
+- Orders, revenue, attendance, and gate-activity dashboards
 
 ### Parent or spectator
 
