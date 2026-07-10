@@ -205,7 +205,7 @@ which adjacent features matter.
 | Item | Current state |
 | --- | --- |
 | Progress | All 19 numbered phases complete |
-| Current phase | Redesign and overview cleanup in progress |
+| Current phase | Redesign refinement in progress |
 | Next major launch step | Stripe live mode and controlled live transaction testing |
 | Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Stripe test mode |
@@ -244,7 +244,6 @@ Known MVP limitations:
 ### Remaining Launch Work
 
 - Finish and verify the light redesign.
-- Review and tighten this overview document as the long-term product reference.
 - Discuss the future path to monetization while keeping the first director
   pilots free to reduce adoption friction.
 - Review market competitors and clarify how TourniBase should position itself
