@@ -38,7 +38,7 @@ come only after the web admissions workflow is validated with real tournaments.
 
 **Market Position**
 
-TourniBase occupies a focused position within the youth sports software market. Rather than attempting to replace every system a tournament director uses, TourniBase is designed specifically to own the spectator admissions experience—from selling admission passes through validating entry at the gate and providing admissions reporting.
+TourniBase is building toward a focused position within the youth sports software market. Its product goal is to own the spectator admissions experience—from selling admission passes through validating entry at the gate and providing admissions reporting—without replacing every other system a tournament director uses. That is the direction of the product, not a claim that TourniBase already owns this market. The current product is an early, working admissions system being prepared for its first tournament pilot.
 
 Many competing products include admissions as one feature within a much broader tournament or event management platform. Others are general-purpose ticketing platforms designed for many types of events. TourniBase instead treats admissions as the primary product. The goal is to provide a simpler, more specialized solution for tournament directors who want reliable, efficient gate operations without adopting an entire tournament management ecosystem.
 
@@ -70,13 +70,13 @@ It should generally be viewed as complementary to TourniBase rather than as a di
 
 **GoFan**
 
-GoFan is a mature digital ticketing platform serving schools, youth sports organizations, and other live events.
+GoFan is a mature digital ticketing platform with admissions software that is substantially similar to TourniBase in several areas. Its strongest established market focus is school athletics, while it also serves youth sports organizations and other live events.
 
 Its documented capabilities include online ticket sales, on-site sales, QR-code validation, gate redemption, attendance reporting, financial reporting, reserved seating, mobile passes, fundraising, concessions, and related event commerce features.
 
-GoFan overlaps substantially with TourniBase in the admissions layer.
+GoFan overlaps substantially with TourniBase in the admissions layer, including ticket sales, mobile passes, validation, redemption, and reporting.
 
-The primary distinction is product focus. GoFan is designed as a broad event ticketing and commerce platform serving many event types, while TourniBase is designed specifically around the operational needs of youth sports tournament admissions.
+The primary distinction is the current market focus. GoFan is established mainly around schools, districts, and school athletics. TourniBase is starting with independently operated private AAU and youth basketball tournaments. TourniBase should not claim that GoFan lacks comparable software; its opportunity is to build a product and operating model specifically for private youth tournament directors and their gate teams.
 
 **Eventbrite**
 
@@ -244,10 +244,6 @@ Known MVP limitations:
 ### Remaining Launch Work
 
 - Finish and verify the light redesign.
-- Discuss the future path to monetization while keeping the first director
-  pilots free to reduce adoption friction.
-- Review market competitors and clarify how TourniBase should position itself
-  against or between them.
 - Switch the Stripe secret key, publishable key, and production webhook to live
   mode together.
 - Complete a controlled low-value live purchase.
