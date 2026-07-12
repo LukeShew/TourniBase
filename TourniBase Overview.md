@@ -209,7 +209,7 @@ which adjacent features matter.
 | Remaining launch step | Stripe live mode and one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Stripe test mode |
-| Database | Live and local histories match all 17 product migrations |
+| Database | Live and local histories match all 18 product migrations |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
 | Refund support | Full-order Stripe refunds plus pass-specific TourniBase refunds, automatic pass invalidation, net-revenue updates, and refund email |
