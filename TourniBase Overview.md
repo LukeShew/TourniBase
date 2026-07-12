@@ -204,29 +204,27 @@ which adjacent features matter.
 
 | Item | Current state |
 | --- | --- |
-| Progress | All 19 numbered phases complete |
-| Current phase | Redesign refinement in progress |
+| Progress | All 19 numbered phases, redesign, and pilot hardening complete |
+| Current phase | Final live-payment setup and validation |
 | Next major launch step | Stripe live mode and controlled live transaction testing |
 | Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Stripe test mode |
-| Database | Live and local histories match all 12 product migrations |
+| Database | Live and local histories match all 16 product migrations |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
-| Refund support | Manual Stripe refunds with automatic full-refund invalidation and TourniBase refund email |
+| Refund support | Full-order Stripe refunds plus pass-specific TourniBase refunds, automatic pass invalidation, net-revenue updates, and refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
 
 Known MVP limitations:
 
 - Stripe is still in test mode.
-- Director accounts are created manually through Supabase.
+- Directors can create an account from the public signup page.
 - Supabase leaked-password protection is unavailable on the current plan, so
   invited directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
-- Refund requests still require manual Stripe action. Full-refund webhook sync
-  blocks refunded passes and emails the buyer once Stripe sends the event to
-  TourniBase.
-- Partial refunds are tracked at the order level and send a buyer email, but
-  pass-specific partial-refund handling is not automated.
+- Full-order refunds can still be created in Stripe. Pass-specific partial
+  refunds are available from TourniBase order details; generic partial refunds
+  created directly in Stripe cannot identify which pass should be invalidated.
 - Footer legal/support pages are baseline MVP pages, not a replacement for
   legal review before higher-volume use.
 - Demo data is available only through a guarded local seed command that blocks
