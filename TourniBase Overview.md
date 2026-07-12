@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 10, 2026
+Last updated and verified: July 12, 2026
 
 ## 1. What is TourniBase?
 
@@ -38,7 +38,7 @@ come only after the web admissions workflow is validated with real tournaments.
 
 **Market Position**
 
-TourniBase is building toward a focused position within the youth sports software market. Its product goal is to own the spectator admissions experience—from selling admission passes through validating entry at the gate and providing admissions reporting—without replacing every other system a tournament director uses. That is the direction of the product, not a claim that TourniBase already owns this market. The current product is an early, working admissions system being prepared for its first tournament pilot.
+TourniBase is focused on the spectator admissions workflow—from selling digital passes through validating entry at the gate and providing admissions reporting—without replacing every other system a tournament director uses. The current product is live and being prepared for its first real-tournament pilot.
 
 Many competing products include admissions as one feature within a much broader tournament or event management platform. Others are general-purpose ticketing platforms designed for many types of events. TourniBase instead treats admissions as the primary product. The goal is to provide a simpler, more specialized solution for tournament directors who want reliable, efficient gate operations without adopting an entire tournament management ecosystem.
 
@@ -204,16 +204,19 @@ which adjacent features matter.
 
 | Item | Current state |
 | --- | --- |
-| Progress | All 19 numbered phases, redesign, and pilot hardening complete |
-| Current phase | Final live-payment setup and validation |
-| Next major launch step | Stripe live mode and controlled live transaction testing |
+| Progress | All 19 numbered MVP phases, the redesign, and pilot hardening are complete |
+| Next focus | Live-payment testing, pilot preparation, and real-tournament validation |
+| Remaining launch step | Stripe live mode and one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Stripe test mode |
-| Database | Live and local histories match all 16 product migrations |
+| Database | Live and local histories match all 17 product migrations |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
 | Refund support | Full-order Stripe refunds plus pass-specific TourniBase refunds, automatic pass invalidation, net-revenue updates, and refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
+
+The redesign is complete, and the web product is ready for a first tournament
+pilot once the four live-payment validation steps below are finished.
 
 Known MVP limitations:
 
@@ -241,15 +244,12 @@ Known MVP limitations:
 
 ### Remaining Launch Work
 
-- Finish and verify the light redesign.
-- Switch the Stripe secret key, publishable key, and production webhook to live
-  mode together.
-- Complete a controlled low-value live purchase.
-- Confirm the live Stripe webhook marks the order paid and sends the buyer email.
-- Confirm the live mobile pass opens and scans correctly.
-- Confirm a live full refund sends the refund email and blocks the refunded pass.
-- Confirm live Stripe totals match TourniBase reporting.
-- Confirm the manual support/refund process is clear enough for the first pilot.
+- Switch the Stripe secret key, publishable key, and webhook to live mode
+  together.
+- Make one small real-money purchase.
+- Verify the email, QR scan, duplicate blocking, refund email, refunded-pass
+  rejection, and dashboard totals.
+- Refund the real test payment.
 
 ### Monetization Strategy
 
