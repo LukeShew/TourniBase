@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 12, 2026
+Last updated and verified: July 16, 2026
 
 ## 1. What is TourniBase?
 
@@ -105,23 +105,32 @@ Tournament directors who already have tournament operations under control—or w
 ### How It Works
 
 1. A director logs in and creates a tournament.
-2. The director creates active ticket types and publishes the public event.
-3. A parent opens the ticket page and pays through Stripe Checkout.
-4. A signed Stripe success event marks the order paid and creates one pass per
+2. The director connects the organization’s Stripe account through hosted
+   onboarding.
+3. The director creates active ticket types and publishes the public event.
+   Paid events require a connected account ready for charges and payouts;
+   free-only events do not.
+4. A parent opens the ticket page and pays through Stripe Checkout. The
+   organizer is the seller and merchant of record, and the payment is a direct
+   charge on the organizer’s connected account.
+5. Stripe deducts processing fees, sends the director’s proceeds to the
+   connected account, and sends TourniBase its configured application fee. The
+   TourniBase fee is $0 during the pilot.
+6. A signed Stripe success event marks the order paid and creates one pass per
    admission.
-5. TourniBase sends one confirmation email containing every individual pass
+7. TourniBase sends one confirmation email containing every individual pass
    link through Resend.
-6. The buyer can open each mobile pass from the email or payment success page,
+8. The buyer can open each mobile pass from the email or payment success page,
    or use the device-save page before arriving if venue service may be weak.
-7. Gate staff open a temporary scanner link and scan the pass QR.
-8. Postgres validates the scanner, tournament, order, pass, valid date, and
+9. Gate staff open a temporary scanner link and scan the pass QR.
+10. Postgres validates the scanner, tournament, order, pass, valid date, and
    prior admissions atomically.
-9. A valid pass returns green and checks in. A second use is blocked.
-10. The director reviews orders, revenue, refunds, and gate activity from the
-    dashboard.
-11. If an order is refunded in Stripe, TourniBase syncs the latest refund
-    status, emails the buyer, and fully invalidates active or checked-in passes
-    on full refunds.
+11. A valid pass returns green and checks in. A second use is blocked.
+12. The director reviews orders, revenue, refunds, estimated fees, proceeds,
+    and gate activity from the dashboard.
+13. If an order is refunded through TourniBase, the refund is scoped to the
+    order’s connected account, the application fee is reversed, affected pass
+    access is updated, and TourniBase emails the buyer.
 
 The pass-email template, retry-safe delivery system, verified sender domain,
 and production Resend transport are live. The first end-to-end purchase test
@@ -138,10 +147,12 @@ sent exactly one email on the first delivery attempt.
   contact email
 - Ticket type creation, editing, activation, and deactivation
 - Draft and published event controls
+- Organization-level Stripe Connect onboarding and payment status
+- Paid-event publishing and paid-ticket activation controls
 - Temporary scanner links with permissions, expiration, and revocation
 - Coach and parent sharing tools
 - Order lookup and order details
-- Stripe refund links from the order log
+- Full-order and individual-pass refund actions from the order log
 - Revenue, admission, refund, and gate-activity dashboards
 - Profile avatar selection from preset icons and colors
 
@@ -149,7 +160,8 @@ sent exactly one email on the first delivery attempt.
 
 - Public tournament ticket page
 - Ticket selection and buyer contact form
-- Stripe-hosted test checkout
+- Stripe-hosted direct-charge test checkout on the organizer’s connected
+  account
 - One individual mobile pass for each purchased admission
 - Automated TourniBase confirmation email containing every purchased pass link
   and a device-save link
@@ -175,6 +187,8 @@ sent exactly one email on the first delivery attempt.
 #### Reporting / Administration
 
 - Gross online sales and estimated payout
+- Gross captured sales, refunds, estimated Stripe fees, TourniBase fees, and
+  estimated director proceeds
 - Online and manual admission totals
 - Revenue by ticket type and sale date
 - Successful, duplicate, invalid, refunded, and wrong-day scans
@@ -206,28 +220,30 @@ which adjacent features matter.
 | --- | --- |
 | Progress | All 19 numbered MVP phases, the redesign, and pilot hardening are complete |
 | Next focus | Live-payment testing, pilot preparation, and real-tournament validation |
-| Remaining launch step | Stripe live mode and one controlled real-money transaction test |
+| Remaining launch step | Connect rollout, director live onboarding, and one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
-| Payments | Stripe test mode |
-| Database | Live and local histories match all 18 product migrations |
+| Payments | Stripe Connect direct charges implemented locally; pilot application fee set to $0 |
+| Database | Production has 18 migrations; the local Connect implementation adds migration 19 |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
-| Refund support | Full-order Stripe refunds plus pass-specific TourniBase refunds, automatic pass invalidation, net-revenue updates, and refund email |
+| Refund support | TourniBase full-order and pass-specific refunds, connected-account synchronization, automatic pass invalidation, net-revenue updates, and refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
 
-The redesign is complete, and the web product is ready for a first tournament
-pilot once the four live-payment validation steps below are finished.
+The redesign is complete. The web product can move to a first tournament pilot
+after the Connect rollout and live-payment validation work below is finished.
 
 Known MVP limitations:
 
-- Stripe is still in test mode.
+- The deployed app remains on its pre-Connect test-mode release until the
+  Connect migration, environment variables, and webhooks are deployed.
+- Stripe Sandbox and live connected accounts are separate. The pilot director
+  must repeat onboarding in live mode before the first real transaction.
 - Directors can create an account from the public signup page.
 - Supabase leaked-password protection is unavailable on the current plan, so
   invited directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
-- Full-order refunds can still be created in Stripe. Pass-specific partial
-  refunds are available from TourniBase order details; generic partial refunds
-  created directly in Stripe cannot identify which pass should be invalidated.
+- Directors should initiate full-order and pass-specific refunds from
+  TourniBase so application-fee reversal and pass handling stay coordinated.
 - Footer legal/support pages are baseline MVP pages, not a replacement for
   legal review before higher-volume use.
 - Demo data is available only through a guarded local seed command that blocks
@@ -244,8 +260,13 @@ Known MVP limitations:
 
 ### Remaining Launch Work
 
-- Switch the Stripe secret key, publishable key, and webhook to live mode
-  together.
+- Apply the Connect migration and deploy the Connect application changes.
+- Configure the connected-payment and Accounts v2 status webhooks in a Stripe
+  Sandbox.
+- Complete director onboarding and the payment/refund/isolation test plan in
+  the Sandbox.
+- Switch the Stripe keys and both Connect webhooks to live mode together.
+- Have the pilot director repeat hosted onboarding in live mode.
 - Make one small real-money purchase.
 - Verify the email, QR scan, duplicate blocking, refund email, refunded-pass
   rejection, and dashboard totals.
@@ -273,8 +294,10 @@ The long-term objective is to align TourniBase’s revenue with the value it cre
 - TypeScript
 - Tailwind CSS
 - Supabase Auth, Postgres, Row Level Security, and migrations
-- Stripe-hosted Checkout and signed webhooks
-- Stripe refund sync into order and pass statuses
+- Stripe Connect Accounts v2 hosted onboarding
+- Direct-charge Stripe Checkout with immutable order routing
+- Separate signed webhooks for connected payments and account status
+- Connected-account refund sync into order and pass statuses
 - TourniBase refund confirmation emails
 - React Email template rendering, Resend delivery, and provider-neutral
   delivery tracking
@@ -314,7 +337,8 @@ Web MVP documentation:
 
 ### Security Architecture
 
-- All 11 public web-app tables have Row Level Security enabled.
+- All 12 public web-app tables have Row Level Security enabled after the
+  Connect migration.
 - Anonymous users can read only published tournaments and active ticket types.
 - Orders, passes, scanner sessions, check-ins, and manual sales are private.
 - Director data is restricted through organization ownership.
