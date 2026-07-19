@@ -1,5 +1,11 @@
 # TourniBase Git Rules
 
+- Treat `/Users/lukeshewmaker/Documents/Codex Sandbox/TourniBase` as the single
+  TourniBase project folder.
+- The only canonical web-app location is
+  `/Users/lukeshewmaker/Documents/Codex Sandbox/TourniBase/apps/tournibase-web-app`.
+- Never create, clone, move, or initialize another TourniBase or
+  `tournibase-web-app` folder outside the main TourniBase project folder.
 - Always commit completed changes.
 - Never push the `tournibase-web-app` repository unless the user explicitly asks for that push.
 - The original `TourniBase` repository may be pushed automatically only when the only changes are to the TourniBase overview document.
