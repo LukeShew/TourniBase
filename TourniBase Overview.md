@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 16, 2026
+Last updated and verified: July 19, 2026
 
 ## 1. What is TourniBase?
 
@@ -142,9 +142,11 @@ sent exactly one email on the first delivery attempt.
 
 - Invite-only password login
 - Protected dashboard and organization ownership
-- Tournament creation with dates, venue, organizer, contact, and public slug
-- Event detail editing for names, dates, venue, description, organizer, and
-  contact email
+- Tournament creation with dates, venue, event contact email, and public slug
+- Director name editing in account settings, with the organizer name kept
+  consistent across every tournament owned by that director
+- Event detail editing for names, dates, venue, description, and event-specific
+  contact email without changing the director’s account email
 - Ticket type creation, editing, activation, and deactivation
 - Draft and published event controls
 - Organization-level Stripe Connect onboarding and payment status
@@ -220,22 +222,21 @@ which adjacent features matter.
 | --- | --- |
 | Progress | All 19 numbered MVP phases, the redesign, and pilot hardening are complete |
 | Next focus | Live-payment testing, pilot preparation, and real-tournament validation |
-| Remaining launch step | Connect rollout, director live onboarding, and one controlled real-money transaction test |
+| Remaining launch step | Complete the Stripe Sandbox regression, repeat director onboarding in live mode, and run one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
-| Payments | Stripe Connect direct charges implemented locally; pilot application fee set to $0 |
-| Database | Production has 18 migrations; the local Connect implementation adds migration 19 |
+| Payments | Stripe Connect direct charges are deployed and configured in a Stripe Sandbox; pilot application fee set to $0 |
+| Database | Production matches all 25 committed product migrations |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
 | Refund support | TourniBase full-order and pass-specific refunds, connected-account synchronization, automatic pass invalidation, net-revenue updates, and refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
 
 The redesign is complete. The web product can move to a first tournament pilot
-after the Connect rollout and live-payment validation work below is finished.
+after the Stripe Sandbox regression and live-payment validation work below are
+finished.
 
 Known MVP limitations:
 
-- The deployed app remains on its pre-Connect test-mode release until the
-  Connect migration, environment variables, and webhooks are deployed.
 - Stripe Sandbox and live connected accounts are separate. The pilot director
   must repeat onboarding in live mode before the first real transaction.
 - Directors can create an account from the public signup page.
@@ -260,11 +261,8 @@ Known MVP limitations:
 
 ### Remaining Launch Work
 
-- Apply the Connect migration and deploy the Connect application changes.
-- Configure the connected-payment and Accounts v2 status webhooks in a Stripe
-  Sandbox.
-- Complete director onboarding and the payment/refund/isolation test plan in
-  the Sandbox.
+- Complete the connected-payment, fee, refund, restriction, and multi-director
+  isolation regression in the Stripe Sandbox.
 - Switch the Stripe keys and both Connect webhooks to live mode together.
 - Have the pilot director repeat hosted onboarding in live mode.
 - Make one small real-money purchase.
