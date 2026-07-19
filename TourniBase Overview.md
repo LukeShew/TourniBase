@@ -140,7 +140,7 @@ sent exactly one email on the first delivery attempt.
 
 #### Tournament Director
 
-- Invite-only password login
+- Public director signup and password login
 - Protected dashboard and organization ownership
 - Tournament creation with dates, venue, event contact email, and public slug
 - Director name editing in account settings, with the organizer name kept
@@ -156,7 +156,7 @@ sent exactly one email on the first delivery attempt.
 - Order lookup and order details
 - Full-order and individual-pass refund actions from the order log
 - Revenue, admission, refund, and gate-activity dashboards
-- Profile avatar selection from preset icons and colors
+- Profile avatar selection from preset icons
 
 #### Parent / Spectator
 
@@ -188,7 +188,6 @@ sent exactly one email on the first delivery attempt.
 
 #### Reporting / Administration
 
-- Gross online sales and estimated payout
 - Gross captured sales, refunds, estimated Stripe fees, TourniBase fees, and
   estimated director proceeds
 - Online and manual admission totals
@@ -247,8 +246,9 @@ Known MVP limitations:
   TourniBase so application-fee reversal and pass handling stay coordinated.
 - Footer legal/support pages are baseline MVP pages, not a replacement for
   legal review before higher-volume use.
-- Demo data is available only through a guarded local seed command that blocks
-  hosted Supabase URLs.
+- A guarded local seed command is available for local development, while
+  controlled sample tournaments and orders may also exist in the hosted
+  environment for testing.
 - Customer-side saved pass images work without buyer internet, but scanner
   devices still need internet for authoritative validation and duplicate
   blocking.
@@ -335,7 +335,7 @@ Web MVP documentation:
 
 ### Security Architecture
 
-- All 12 public web-app tables have Row Level Security enabled after the
+- All 13 public web-app tables have Row Level Security enabled after the
   Connect migration.
 - Anonymous users can read only published tournaments and active ticket types.
 - Orders, passes, scanner sessions, check-ins, and manual sales are private.
