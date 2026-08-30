@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified: July 19, 2026
+Last updated and verified against the local repositories: August 30, 2026
 
 ## 1. What is TourniBase?
 
@@ -114,8 +114,9 @@ Tournament directors who already have tournament operations under control—or w
    organizer is the seller and merchant of record, and the payment is a direct
    charge on the organizer’s connected account.
 5. Stripe deducts processing fees, sends the director’s proceeds to the
-   connected account, and sends TourniBase its configured application fee. The
-   TourniBase fee is $0 during the pilot.
+   connected account, and sends TourniBase its configured application fee.
+   Permanent staging uses a $0 fee; production is configured for exactly 2%
+   plus 30 cents per paid order after its launch gate passes.
 6. A signed Stripe success event marks the order paid and creates one pass per
    admission.
 7. TourniBase sends one confirmation email containing every individual pass
@@ -162,8 +163,8 @@ sent exactly one email on the first delivery attempt.
 
 - Public tournament ticket page
 - Ticket selection and buyer contact form
-- Stripe-hosted direct-charge test checkout on the organizer’s connected
-  account
+- Stripe-hosted direct-charge checkout on the organizer’s connected account,
+  isolated to either the test or live application environment
 - One individual mobile pass for each purchased admission
 - Automated TourniBase confirmation email containing every purchased pass link
   and a device-save link
@@ -220,25 +221,30 @@ which adjacent features matter.
 | Item | Current state |
 | --- | --- |
 | Progress | All 19 numbered MVP phases, the redesign, and pilot hardening are complete |
-| Next focus | Live-payment testing, pilot preparation, and real-tournament validation |
-| Remaining launch step | Complete the Stripe Sandbox regression, repeat director onboarding in live mode, and run one controlled real-money transaction test |
+| Next focus | Safely deploy the staging/production split, then complete live-payment validation |
+| Remaining launch step | Apply the ordered environment rollout, finish live onboarding and webhooks, and run one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
-| Payments | Stripe Connect direct charges are deployed and configured in a Stripe Sandbox; pilot application fee set to $0 |
-| Database | Production matches all 25 committed product migrations |
+| Payments | Direct charges are built; staging stays in Stripe Sandbox at $0, while production will use live Connect at 2% plus 30 cents |
+| Environment split | Implemented locally with one Vercel project and one Supabase project; not deployed |
+| Database | Production matches 25 migrations; the additive environment migration is prepared locally but not applied |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
 | Refund support | TourniBase full-order and pass-specific refunds, connected-account synchronization, automatic pass invalidation, net-revenue updates, and refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
 
 The redesign is complete. The web product can move to a first tournament pilot
-after the Stripe Sandbox regression and live-payment validation work below are
-finished.
+after the environment split, Stripe regression, and live-payment validation
+work below are finished.
 
 Known MVP limitations:
 
-- Stripe Sandbox and live connected accounts are separate. The pilot director
-  must repeat onboarding in live mode before the first real transaction.
-- Directors can create an account from the public signup page.
+- The staging/production split is implemented locally but is not deployed, and
+  its additive database migration is not applied.
+- Stripe Sandbox and live connected accounts are separate. Every production
+  director must complete live onboarding before the first real transaction.
+- Directors can create an account only from the production signup page.
+- The signed-out staging entrance uses the normal public design, exposes no
+  test-event listing or staging label, and is marked not to be indexed.
 - Supabase leaked-password protection is unavailable on the current plan, so
   invited directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
@@ -261,10 +267,12 @@ Known MVP limitations:
 
 ### Remaining Launch Work
 
-- Complete the connected-payment, fee, refund, restriction, and multi-director
+- Follow the ordered one-Vercel-project, one-Supabase-project environment
+  rollout without applying the post-deploy contract early.
+- Complete the connected-payment, fee, refund, restriction, and environment
   isolation regression in the Stripe Sandbox.
-- Switch the Stripe keys and both Connect webhooks to live mode together.
-- Have the pilot director repeat hosted onboarding in live mode.
+- Configure live Stripe keys and both live Connect webhooks.
+- Have the pilot director complete hosted onboarding in live mode.
 - Make one small real-money purchase.
 - Verify the email, QR scan, duplicate blocking, refund email, refunded-pass
   rejection, and dashboard totals.
@@ -272,17 +280,22 @@ Known MVP limitations:
 
 ### Monetization Strategy
 
-TourniBase is currently free for tournament directors during the pilot period, with no platform fee taken today.
+TourniBase’s permanent staging account remains free so it can be used for
+repeatable testing without moving real money. Production is configured to take
+an application fee of 2% plus 30 cents from each paid order once live checkout
+passes its launch test and is enabled.
 
-After the product proves value through sustained real-world tournament usage, TourniBase is expected to transition to a paid model.
+Pricing can still change after TourniBase gathers real tournament data.
 
 The current monetization direction is expected to consist of:
 
 * A recurring subscription for tournament directors.
-* A small platform fee on admission passes sold through TourniBase.
+* The initial 2% plus 30-cent application fee on production admission orders.
 * Payment processing fees handled during checkout where appropriate.
 
-Exact pricing has not been finalized and may evolve as the product matures. Pricing decisions will be based on customer feedback, demonstrated value, and long-term business sustainability.
+The initial production application fee is fixed in the current rollout. Future
+subscription pricing or later fee changes are not finalized and should be based
+on customer feedback, demonstrated value, and long-term business sustainability.
 
 The long-term objective is to align TourniBase’s revenue with the value it creates for tournament operators while keeping adoption friction low during the product’s early growth.
 
@@ -300,6 +313,9 @@ The long-term objective is to align TourniBase’s revenue with the value it cre
 - React Email template rendering, Resend delivery, and provider-neutral
   delivery tracking
 - Vercel hosting
+- One Vercel project with a branch-scoped staging deployment and the production
+  deployment
+- One Supabase project with immutable organization environment routing
 - ZXing browser camera scanning
 - Server Components and Server Actions for protected data and mutations
 - Temporary scanner credentials stored only as SHA-256 hashes
@@ -331,13 +347,15 @@ Web MVP documentation:
 - [Implementation roadmap](apps/tournibase-web-app/docs/implementation-roadmap.md)
 - [Transactional email](apps/tournibase-web-app/docs/transactional-email.md)
 - [Final MVP handoff](apps/tournibase-web-app/docs/mvp-handoff.md)
+- [Staging and production rollout](apps/tournibase-web-app/docs/environment-rollout.md)
 - [Setup and test guide](apps/tournibase-web-app/README.md)
 
 ### Security Architecture
 
 - All 13 public web-app tables have Row Level Security enabled after the
   Connect migration.
-- Anonymous users can read only published tournaments and active ticket types.
+- The prepared post-deploy contract removes anonymous Data API reads after the
+  environment-aware app is active on both stable hosts.
 - Orders, passes, scanner sessions, check-ins, and manual sales are private.
 - Director data is restricted through organization ownership.
 - Supabase and Stripe secret keys remain server-only.
