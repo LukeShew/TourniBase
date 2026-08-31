@@ -141,9 +141,9 @@ sent exactly one email on the first delivery attempt.
 
 #### Tournament Director
 
-- Public production signup and password login are built; its trusted server
-  database permission is restored and verified, but the Supabase Auth signup
-  toggle remains maintenance-disabled
+- Public production signup and password login are active; the Supabase Auth
+  signup setting and trusted server database path were independently verified
+  on August 31, 2026
 - Protected dashboard and organization ownership
 - Tournament creation with dates, venue, event contact email, and public slug
 - Director name editing in account settings, with the organizer name kept
@@ -223,8 +223,8 @@ which adjacent features matter.
 | Item | Current state |
 | --- | --- |
 | Progress | All 19 numbered MVP phases, the redesign, and pilot hardening are complete |
-| Next focus | Re-enable Supabase Auth signup, configure live Stripe, and complete live-payment validation |
-| Remaining launch step | Re-enable signup, configure live keys and webhooks, complete live onboarding, and run one controlled real-money transaction test |
+| Next focus | Configure live Stripe and complete live-payment validation |
+| Remaining launch step | Configure live keys and webhooks, complete live onboarding, and run one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
 | Payments | Direct charges are built; staging uses the Stripe onboarding Sandbox at $0, while production is isolated for live Connect at 2% plus 30 cents with paid checkout disabled |
 | Environment split | Deployed with one Vercel project and one Supabase project; organizations are permanently classified as `test` or `live` |
@@ -235,24 +235,24 @@ which adjacent features matter.
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
 
 The redesign is complete. The web product can move to a first tournament pilot
-after the remaining maintenance cleanup, Stripe regression, live setup, and
-live-payment validation work below are finished.
+after the remaining Stripe regression, live setup, and live-payment validation
+work below are finished.
 
 Known MVP limitations:
 
 - Staging and production are deployed against one shared Supabase project with
   enforced test/live isolation. Production paid checkout remains disabled.
-- The trusted production organization-creation grant is restored and verified,
-  and direct authenticated inserts remain blocked. Supabase Auth signup is
-  still maintenance-disabled pending its final dashboard toggle.
+- Production Supabase Auth signup is enabled and independently verified with
+  `disable_signup: false`. The trusted organization-creation grant is restored,
+  while direct authenticated organization inserts remain blocked.
 - Stripe Sandbox and live connected accounts are separate. Every production
   director must complete live onboarding before the first real transaction.
-- Once signup reopens, directors create accounts only from the production
-  signup page.
+- Directors create accounts only from the production signup page; staging
+  `/signup` remains disabled and redirects to production.
 - The signed-out staging entrance uses the normal public design, exposes no
   test-event listing or staging label, and is marked not to be indexed.
 - Supabase leaked-password protection is unavailable on the current plan, so
-  invited directors must use strong, unique passwords.
+  directors must use strong, unique passwords.
 - Gate-sale recording tracks external payment but does not charge a card.
 - Directors should initiate full-order and pass-specific refunds from
   TourniBase so application-fee reversal and pass handling stay coordinated.
@@ -273,8 +273,6 @@ Known MVP limitations:
 
 ### Remaining Launch Work
 
-- Re-enable Supabase Auth signup. The trusted server organization-creation path
-  is restored and verified, while direct authenticated inserts remain blocked.
 - Finish the connected-payment, fee, refund, restriction, and environment
   isolation regression in the Stripe Sandbox. The dual deployment and both
   environment-isolation migrations are already complete.
