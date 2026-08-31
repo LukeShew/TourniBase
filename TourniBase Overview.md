@@ -1,6 +1,6 @@
 # TourniBase Overview
 
-Last updated and verified against the local repositories: August 30, 2026
+Last updated and verified against the local repositories: August 31, 2026
 
 ## 1. What is TourniBase?
 
@@ -141,7 +141,9 @@ sent exactly one email on the first delivery attempt.
 
 #### Tournament Director
 
-- Public director signup and password login
+- Public production signup and password login are built; its trusted server
+  database permission is restored and verified, but the Supabase Auth signup
+  toggle remains maintenance-disabled
 - Protected dashboard and organization ownership
 - Tournament creation with dates, venue, event contact email, and public slug
 - Director name editing in account settings, with the organizer name kept
@@ -221,28 +223,32 @@ which adjacent features matter.
 | Item | Current state |
 | --- | --- |
 | Progress | All 19 numbered MVP phases, the redesign, and pilot hardening are complete |
-| Next focus | Safely deploy the staging/production split, then complete live-payment validation |
-| Remaining launch step | Apply the ordered environment rollout, finish live onboarding and webhooks, and run one controlled real-money transaction test |
+| Next focus | Re-enable Supabase Auth signup, configure live Stripe, and complete live-payment validation |
+| Remaining launch step | Re-enable signup, configure live keys and webhooks, complete live onboarding, and run one controlled real-money transaction test |
 | Live web app | [tournibase.com](https://tournibase.com) |
-| Payments | Direct charges are built; staging stays in Stripe Sandbox at $0, while production will use live Connect at 2% plus 30 cents |
-| Environment split | Implemented locally with one Vercel project and one Supabase project; not deployed |
-| Database | Production matches 25 migrations; the additive environment migration is prepared locally but not applied |
+| Payments | Direct charges are built; staging uses the Stripe onboarding Sandbox at $0, while production is isolated for live Connect at 2% plus 30 cents with paid checkout disabled |
+| Environment split | Deployed with one Vercel project and one Supabase project; organizations are permanently classified as `test` or `live` |
+| Database | Hosted Supabase matches 28 migrations; isolation migrations `20260829002309` and `20260831003839`, plus trusted-signup grant migration `20260831024917`, are applied |
 | Email | Live through Resend |
 | Pass retrieval | Success page, automated email, mobile pass page, and device-save page |
 | Refund support | TourniBase full-order and pass-specific refunds, connected-account synchronization, automatic pass invalidation, net-revenue updates, and refund email |
 | Legal/support pages | Footer links to Terms, Privacy, Refund Policy, and Support |
 
 The redesign is complete. The web product can move to a first tournament pilot
-after the environment split, Stripe regression, and live-payment validation
-work below are finished.
+after the remaining maintenance cleanup, Stripe regression, live setup, and
+live-payment validation work below are finished.
 
 Known MVP limitations:
 
-- The staging/production split is implemented locally but is not deployed, and
-  its additive database migration is not applied.
+- Staging and production are deployed against one shared Supabase project with
+  enforced test/live isolation. Production paid checkout remains disabled.
+- The trusted production organization-creation grant is restored and verified,
+  and direct authenticated inserts remain blocked. Supabase Auth signup is
+  still maintenance-disabled pending its final dashboard toggle.
 - Stripe Sandbox and live connected accounts are separate. Every production
   director must complete live onboarding before the first real transaction.
-- Directors can create an account only from the production signup page.
+- Once signup reopens, directors create accounts only from the production
+  signup page.
 - The signed-out staging entrance uses the normal public design, exposes no
   test-event listing or staging label, and is marked not to be indexed.
 - Supabase leaked-password protection is unavailable on the current plan, so
@@ -267,10 +273,11 @@ Known MVP limitations:
 
 ### Remaining Launch Work
 
-- Follow the ordered one-Vercel-project, one-Supabase-project environment
-  rollout without applying the post-deploy contract early.
-- Complete the connected-payment, fee, refund, restriction, and environment
-  isolation regression in the Stripe Sandbox.
+- Re-enable Supabase Auth signup. The trusted server organization-creation path
+  is restored and verified, while direct authenticated inserts remain blocked.
+- Finish the connected-payment, fee, refund, restriction, and environment
+  isolation regression in the Stripe Sandbox. The dual deployment and both
+  environment-isolation migrations are already complete.
 - Configure live Stripe keys and both live Connect webhooks.
 - Have the pilot director complete hosted onboarding in live mode.
 - Make one small real-money purchase.
@@ -352,10 +359,9 @@ Web MVP documentation:
 
 ### Security Architecture
 
-- All 13 public web-app tables have Row Level Security enabled after the
-  Connect migration.
-- The prepared post-deploy contract removes anonymous Data API reads after the
-  environment-aware app is active on both stable hosts.
+- All 13 public web-app tables have Row Level Security enabled.
+- The applied contract migration removes anonymous Data API reads; public event
+  and ticket pages use the environment-aware server data layer.
 - Orders, passes, scanner sessions, check-ins, and manual sales are private.
 - Director data is restricted through organization ownership.
 - Supabase and Stripe secret keys remain server-only.
