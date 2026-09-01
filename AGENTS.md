@@ -6,6 +6,10 @@
   `/Users/lukeshewmaker/Documents/Codex Sandbox/TourniBase/apps/tournibase-web-app`.
 - Never create, clone, move, or initialize another TourniBase or
   `tournibase-web-app` folder outside the main TourniBase project folder.
+- Keep staging and production on the same application code, UI, routes, and
+  behavior. They may differ only through intentional environment configuration,
+  such as test versus live data, accounts, payments, fees, email handling,
+  domains, access controls, and search indexing.
 - Always commit completed changes.
 - Never push the `tournibase-web-app` repository unless the user explicitly asks for that push.
 - The original `TourniBase` repository may be pushed automatically only when the only changes are to the TourniBase overview document.
